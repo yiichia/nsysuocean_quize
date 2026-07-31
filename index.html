@@ -5,16 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>你是哪一種海洋生物？ ｜ 中山大學海洋性向測驗</title>
 <!--
-  字型：預設使用系統內建字型，全站「零外部連線」（不連 Google、不載入任何第三方資源）。
-  若想要原本的 Noto Sans TC 外觀，把下面兩行取消註解，並在 body 的 font-family 最前面加上 "Noto Sans TC"。
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  ============================================================
+  v2 改版重點（相對於原版）
+  1. 結果頁新增「你是不是⋯⋯」——只寫這一型的人的做事方式，
+     不出現任何系名，避免變成科系推薦。
+  2. 結果頁新增「中山冷知識」——每次隨機出 3 則，附解鎖進度，
+     3 則彩蛋只有解鎖隱藏版／進化版才看得到，製造回訪動機。
+  3. 分享文案自動加上校名與網址（原版分享出去完全沒有品牌）。
+  4. CTA 從單一「海洋營隊」改為三軌，並移除科系導向字眼。
+  5. 結果頁底部加上「這不是性向鑑定」的誠實聲明。
+
+  ⚠ 需要你替換的地方，都用「【待確認】」或「【待填】」標出，搜尋即可找到。
+  字型維持系統內建，全站零外部連線。
+  ============================================================
 -->
 <style>
   :root{
     --cream:#f7ddc0;--cream-lt:#fbf1e3;
     --sky:#8bb7db;--blue:#2775b5;--deep:#0a5ea3;
-    --teal:#20685a;
+    --teal:#20685a;--amber:#a8641d;
     --navy:#123a5c;--ink:#1c4363;--ink2:#6286a3;
     --card:#fdf8f1;--line:#ecdfcb;--line-c:#d8e6f2;
   }
@@ -56,6 +65,7 @@
   .btn:hover{filter:brightness(1.06)} .btn:active{transform:scale(.98)}
   .btn.ghost{background:#fff;color:var(--deep);border:1.5px solid var(--line-c);font-weight:700;box-shadow:none}
   .btn.sea{background:var(--teal);box-shadow:0 8px 18px -8px rgba(32,104,90,.7)}
+  .btn.sm{padding:12px;font-size:14.5px}
   .tag{display:inline-block;font-size:11px;letter-spacing:.14em;color:var(--teal);font-weight:700;
     background:var(--cream);border-radius:99px;padding:5px 12px;margin-bottom:16px}
   .prog{height:7px;background:#e7eef6;border-radius:99px;overflow:hidden;margin-bottom:10px}
@@ -85,13 +95,42 @@
   .pair{display:flex;flex-direction:column;gap:6px}
   .pair span{font-size:14px;color:var(--ink)}
   .pair b{color:var(--deep);font-weight:700;margin-right:8px;font-size:13px}
+
+  /* ── v2 新增：校園場景區（不提系名）───────────────── */
+  .campus{background:#fff;border:1.5px solid var(--line-c);border-radius:14px;padding:16px 17px;margin-bottom:11px}
+  .campus h3{font-size:12px;letter-spacing:.12em;color:var(--deep);margin-bottom:11px;font-weight:700}
+  .campus ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .campus li{font-size:14.5px;color:var(--ink);padding-left:19px;position:relative;line-height:1.62}
+  .campus li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:50%;
+    background:var(--sky);box-shadow:0 0 0 3px rgba(139,183,219,.25)}
+  .campus small{display:block;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.6}
+
+  /* ── v2 新增：中山冷知識區 ─────────────────────────── */
+  .facts{background:linear-gradient(180deg,#fff 0%,#f4f9fd 100%);border:1.5px solid var(--line-c);
+    border-radius:14px;padding:16px 17px;margin-bottom:11px}
+  .facts h3{font-size:12px;letter-spacing:.12em;color:var(--deep);margin-bottom:4px;font-weight:700}
+  .facts ul{list-style:none}
+  .facts li{border-top:1px dashed var(--line-c);padding:12px 0 2px}
+  .facts li:first-child{border-top:none;padding-top:10px}
+  .ftag{display:inline-block;font-size:10.5px;letter-spacing:.1em;font-weight:700;color:var(--deep);
+    background:#e8f1f9;border-radius:99px;padding:3px 9px;margin-bottom:6px}
+  .facts p{font-size:14.5px;color:var(--ink);line-height:1.65}
+  .frare .ftag{color:var(--amber);background:var(--cream)}
+  .fbar{display:flex;align-items:center;gap:9px;margin-top:14px}
+  .fbar .track{flex:1;height:6px;background:#e7eef6;border-radius:99px;overflow:hidden}
+  .fbar .track i{display:block;height:100%;background:linear-gradient(90deg,var(--sky),var(--teal));transition:width .5s ease}
+  .fbar span{font-size:11.5px;color:var(--ink2);font-weight:600;white-space:nowrap}
+  .fnudge{font-size:12.5px;color:var(--teal);margin-top:8px;font-weight:600;line-height:1.6}
+
   .share{background:var(--cream-lt);border:1.5px dashed #e0c39a;border-radius:14px;padding:15px 17px;margin:15px 0}
-  .share p{font-size:15px;color:var(--ink);font-weight:500;margin-bottom:12px}
+  .share p{font-size:15px;color:var(--ink);font-weight:500;margin-bottom:12px;white-space:pre-line}
   .share .row button{width:100%;padding:11px;border-radius:11px;font-size:14px;font-weight:700}
   .share small{display:block;margin-top:10px;font-size:12px;color:var(--ink2)}
   .actions{display:flex;flex-direction:column;gap:10px;margin-top:18px}
-  /* 卡片內部的小註記（與頁尾 .foot 分開，避免互相覆蓋） */
-  .note{text-align:center;font-size:12px;color:var(--ink2);margin-top:16px;line-height:1.6}
+  .actions .hint{font-size:12px;color:var(--ink2);text-align:center;margin-top:2px}
+  .disclaim{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--ink2);line-height:1.7;text-align:center}
+  .note{text-align:center;font-size:12px;color:var(--ink2);margin-top:12px;line-height:1.6}
   .foot{text-align:center;font-size:12px;color:rgba(255,255,255,.9);margin-top:20px;line-height:1.6;
     text-shadow:0 1px 3px rgba(10,70,90,.3)}
   .foot b{font-weight:700}
@@ -107,16 +146,23 @@
     <span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="b b4"></span>
   </div>
   <main class="card" id="card"></main>
-  <p class="foot">中山大學 · 海洋科學學院｜西子灣 × 壽山 × 太平洋<br><b>示範雛形</b>　劇情與計分皆可調整</p>
+  <p class="foot">中山大學｜西子灣 × 壽山 × 太平洋<br><b>示範雛形</b>　劇情與計分皆可調整</p>
 </div>
 
 <script>
-/* ───────────────────────────────────────────────
-   營隊報名連結：填入網址後，結果頁按鈕就會生效。
-   留空時按鈕不會跳轉，只會顯示「連結尚未設定」。
-   ─────────────────────────────────────────────── */
-const CAMP_URL = "";
+/* ═══════════════════════════════════════════════════════════
+   0. 出口連結設定：填入網址後，結果頁三顆按鈕就會生效。
+      留空時按鈕不跳轉，只會提示尚未設定。
+      建議每條都掛 UTM，才知道哪一型的人最容易轉換。
+   ═══════════════════════════════════════════════════════════ */
+const LINK_EXPLORE = "";   // 【待填】「看看中山有什麼」落地頁（校園導覽／學院總覽／影片牆）
+const LINK_EVENT   = "";   // 【待填】營隊／體驗活動／校園參訪報名
+const LINK_FOLLOW  = "";   // 【待填】IG 或 LINE 官方帳號（最重要，唯一能長期溝通的出口）
+const SITE_URL     = "";   // 【待填】測驗本身的短網址，會自動附在分享文案後面
 
+/* ═══════════════════════════════════════════════════════════
+   1. 十型原型資料（沿用原版，未更動）
+   ═══════════════════════════════════════════════════════════ */
 const A = {
   exp:{name:"抹香鯨 Sperm Whale",title:"深海探險家",sub:"好奇 · 敢闖 · 動手派",rarity:"常見型 · 敢衝的人不少",
     trait:"別人還在猶豫，你已經下水了。你不是天生大膽，只是好奇心每次都贏過害怕。做了再說、錯了再改，這樣的你其實走得比誰都遠。",
@@ -246,6 +292,147 @@ const A = {
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="燈塔水母"><path d="M74 84 C74 54 92 38 110 38 C128 38 146 54 146 84 C146 90 140 92 132 92 C118 94 102 94 88 92 C80 92 74 90 74 84Z" fill="#bfe6f2" opacity=".85"/><path d="M96 60 C100 74 100 84 100 90 M110 58 C110 74 110 86 110 92 M124 60 C120 74 120 84 120 90" stroke="#e0463a" stroke-width="4" stroke-linecap="round"/><circle cx="110" cy="70" r="7" fill="#f26a5c"/><path d="M80 90 C78 104 82 116 80 130 M88 92 C88 108 90 120 88 134 M98 93 C98 110 96 124 98 138 M110 93 C110 110 112 124 110 140 M122 93 C122 110 124 122 122 138 M132 92 C132 108 130 120 132 134 M140 90 C142 104 138 116 142 130" stroke="#8fd4e6" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M74 84 C90 90 130 90 146 84" fill="none" stroke="#9fdcec" stroke-width="2"/></svg>`}
 };
 
+/* ═══════════════════════════════════════════════════════════
+   2.【v3.1】你是不是⋯⋯：這一型的人常有的做事方式
+      規則：一律用「你」開頭的行為描述，不寫系名、不寫學院。
+      每型 4 條，寫得越具體、越像被說中，分享率越高。
+      進化版（exp2 等）自動沿用基本型，不必另外寫。
+   ═══════════════════════════════════════════════════════════ */
+const BEHAVIORS = {
+  exp:["說明書還沒看完，你已經開始動手拆了。",
+       "別人問「這樣可以嗎」，你想的是「試了就知道」。",
+       "行程表上永遠留一格空白，因為你可能臨時想去哪。",
+       "做錯了你不太難過，只會想下次怎麼改。"],
+  gua:["看到不對的事，就算跟你無關，也會渾身不對勁。",
+       "答應過的事，就算沒人記得，你自己記得。",
+       "群組裡沒人說話的時候，你是先開口的那個。",
+       "你的溫柔常被當成好說話，其實你只是選擇不計較。"],
+  arc:["開始之前，一定要先把步驟排一遍才安心。",
+       "別人覺得差不多了，你還看得到那個沒對齊的地方。",
+       "你做的東西別人接手都很順，因為你早就想到了。",
+       "臨時改需求會讓你很不爽，但你還是會做完。"],
+  nav:["討論卡住的時候，你會忍不住開口收尾。",
+       "你認識的人裡，有一半是你介紹他們認識的。",
+       "事情還沒開始，你腦中已經有分工了。",
+       "你不太喜歡等別人決定。"],
+  obs:["進到新環境，你會先安靜地看過一輪。",
+       "你常常已經看出問題了，但沒說。",
+       "比起被問「你覺得呢」，你更想自己先想完。",
+       "你記得很多別人以為沒人注意到的細節。"],
+  cre:["看到很美的東西，第一個動作是想把它留下來。",
+       "你的相簿裡，有很多沒有人的照片。",
+       "腦子裡常有畫面在跑，但講出來只有你自己懂。",
+       "你很在意一件事有沒有被好好講出來。"],
+  slu:["大家都選 A 的時候，你會想想有沒有 C。",
+       "你的喜好很難被歸類，你也懶得解釋。",
+       "你不討厭一個人，你只討厭勉強。",
+       "別人開始跟風的時候，你已經在退燒了。"],
+  sea:["你話不多，但你在乎的事會做很久。",
+       "換手機、換店家、換朋友，你都換得很慢。",
+       "你不太爭，但也不太退。",
+       "你的付出常常沒被看見，你也沒打算讓人看見。"],
+  shr:["群組裡的雜事，最後都會變成你在做。",
+       "你會先注意到誰沒說話、誰沒吃飽。",
+       "說「我來就好」的次數，比說「我不行」多很多。",
+       "你很難拒絕別人，但你也不太後悔。"],
+  bri:["你摔過，而且不只一次。",
+       "事情不順的時候，你會先找路，而不是先生氣。",
+       "你比同齡的人多繞了一段路，但你知道自己為什麼繞。",
+       "你不太說自己撐過什麼。"],
+  oct:["每個朋友圈認識的你，好像都不太一樣。",
+       "你可以很吵，也可以很安靜，看場合。",
+       "「你到底是什麼樣的人」，你自己也答不太出來。",
+       "你什麼都能上手，但很難說哪一個才是你。"]
+};
+
+/* ═══════════════════════════════════════════════════════════
+   3.【v3 改版】中山冷知識：每次隨機出 3 則
+      rare:true 的只有解鎖隱藏版／進化版才會出現。
+
+      ── 為什麼改名 ──────────────────────────────
+      原本想叫「海洋冷知識」，那會讓「中山＝海」的印象更深，
+      跟破除刻板印象的目標相反。改成「中山冷知識」之後，
+      海洋那幾則從「主題」降為「舉例」，訊息就對了。
+
+      ── 這一版砍掉的 3 則，以及原因 ──────────────
+      ✗「全台最完整的海洋研究」：無法查證，且排名式宣稱對高中生說服力低。
+      ✗「海景配夕陽看到飽」：是氛圍不是知識，看完記不住，已併入西子灣那則。
+      ✗「海工館階梯彩繪」：當拍照點很好，當冷知識太薄。
+        → 建議降級成 IG 視覺素材／校園導覽地圖上的一個點，不佔一張卡。
+
+      ── 還缺的素材（見下方 FACTS_TODO）────────────
+      目前非海洋的具體事例仍偏少，補齊後這個系列才站得住。
+
+      ⚠【待確認】共 9 處，請與各單位核對後再上線。
+      ⚠「學長姐說」3 則是示範文案，強烈建議換成真實徵集。
+   ═══════════════════════════════════════════════════════════ */
+const FACTS = [
+  // ── 只有這裡有（你的 4 強素材）──────────────────────
+  {tag:"只有這裡有", text:"海上風帆是中山的體育課選項之一。別的學校打羽球，你這裡可以在西子灣外海學開帆船。"},
+  // 【待確認】開課名稱、是否仍為現行選項 → 體育室
+  {tag:"只有這裡有", text:"中山的游泳是必修。蛙式 25 公尺沒過，不能畢業。"},
+  // 【待確認】現行畢業門檻與標準 → 教務處／體育室
+  {tag:"只有這裡有", text:"中山有一艘自己的研究船「海研三號」。學生真的上得去——出海不是比喻。"},
+  // 【待確認】學生實際上船的管道與頻率 → 海科院。重點寫「學生上得去」，不要只寫船。
+  {tag:"只有這裡有", text:"中山就座落在西子灣。走出教室就是海灘，這在台灣的大學裡非常少見。"},
+  // 【待確認】原稿寫「全台唯一擁有海灘與海水浴場的大學」，若要用「唯一」請先確認，
+  //           否則維持現在這個保守但同樣有力的寫法。
+
+  // ── 不只有海（破除刻板印象的主力）──────────────────
+  {tag:"不只有海", text:"中山的「石化工程」在 2026 QS 世界學科排名進了全球百大，全國第一。這不是海洋，是工程。"},
+  {tag:"不只有海", text:"16 個學科入榜 QS 世界學科排名，入榜數量全國第五。海洋只是其中一個。"},
+  // ⚠ 注意：是「入榜學科數」全國第五，不是「16 個學科各自都在全國前 5」。原簡報寫法會被誤讀。
+  {tag:"不只有海", text:"〈鄉愁〉的余光中，在中山教了二十幾年書。你課本裡的那個人，曾經在這裡上下班。"},
+  // 【待確認】任教起訖年份 → 文學院／校史室
+  {tag:"不只有海", text:"校園裡有練琴的、有排戲的，也有寫程式寫到天亮的。走一圈聽到的聲音，比你想的雜。"},
+
+  // ── 走出校園 ────────────────────────────────────────
+  {tag:"走出校園", text:"52 個雙聯學位合作。有人四年多一點，就拿了兩張不同國家的畢業證書。"},
+  // 【待確認】雙聯數字與實際修業年限 → 國際處
+  {tag:"走出校園", text:"中山和 46 個國家的學校有合作。想出去，選擇比你以為的多。"},
+  // 【待確認】若查得到「每年實際出去交換的人數」，換成那個數字會強很多——
+  //           303 所是機會，實際人數才是機率。
+  {tag:"走出校園", text:"亞洲新灣區就在旁邊。想實習，不一定要搬去台北。"},
+  {tag:"走出校園", text:"出校門就是哈瑪星和鹽埕，搭渡輪十分鐘到旗津。老街、咖啡店、深夜的麵攤，都在走路距離內。"},
+
+  // ── 校園日常 ────────────────────────────────────────
+  {tag:"校園日常", text:"1980 年以前，這塊地跟動物園有關係。現在變成大學了，但猴子沒走。"},
+  // 【待確認】校地沿革的正確說法 → 校史室。原稿「以前是動物園」講得太滿，容易被挑，
+  //           改成這樣既保留鉤子，又順勢串到獼猴。
+  {tag:"校園日常", text:"要進學校，得先穿過一條隧道。那條隧道是很多人對中山的第一個記憶。"},
+  {tag:"校園日常", text:"從宿舍走到海邊，比走到某些教室還近。"},
+  {tag:"校園日常", text:"這裡的坡很陡。四年下來，你的小腿會有感。"},
+
+  // ── 學長姐說（示範文案，建議全數換成真實徵集）────────
+  {tag:"學長姐說", text:"「爬坡真的很累。但每次轉彎看到海，就原諒它了。」——大三"},
+  {tag:"學長姐說", text:"「我進來以前也以為中山只有海。大一結束才知道自己錯了。」——大二"},
+  {tag:"學長姐說", text:"「學校小有小的好。四年下來，你會認識很多不同科系的人。」——大四"},
+
+  // ── 隱藏冷知識（只有解鎖隱藏版／進化版看得到）─────────
+  {tag:"隱藏冷知識", rare:true, text:"校門旁邊，是一座一百多年前的英國領事館。你上課的地方，本身就是歷史現場。"},
+  {tag:"隱藏冷知識", rare:true, text:"這所學校小到你一天會遇見同一個人三次，又大到你四年還沒走完所有看海的角落。"},
+  {tag:"隱藏冷知識", rare:true, text:"很多人是為了海來的。但最後留下來的理由，每個人都不一樣。"}
+];
+
+/* ── 還缺的素材：補進上面的 FACTS 就會自動進池子 ──────────
+   標準三個：只有中山有、可查證、看完會想截圖。
+   目前非海洋的具體事例偏少，這 5 格是整個系列的短板：
+
+   1.【待補】一位現在還在校、學生真的修得到課的知名老師。
+      余光中很強，但他已經離開了——你需要一個「現在進行式」的版本。
+      這是最重要的一格。
+   2.【待補】一堂只有中山開得成的課（不限海洋）。
+   3.【待補】某個學生團隊做出來、真的被用的東西。
+   4.【待補】亞灣／高雄港帶來的、別校學生沒有的實習機會（具體到公司或職缺類型）。
+   5.【待補】某個校園規定或作息造成的特殊生活習慣（像游泳必修那種，好笑又好記）。
+
+   寫法範例（照抄格式即可）：
+   {tag:"不只有海", text:"你的句子。"},
+   ────────────────────────────────────────────────────── */
+
+/* ═══════════════════════════════════════════════════════════
+   4. 題目（沿用原版）
+   ═══════════════════════════════════════════════════════════ */
 const Q = [
   {sc:"清晨的西子灣",t:"天剛亮，你獨自站在西子灣的海堤上，海面閃著光、空氣裡有鹹味。這一刻，你最想做什麼？",
     o:[["二話不說換上裝備跳下去","exp"],["先看看今天的海況和浪","obs"],["深呼吸，把這片風景記進心裡","cre"],["傳訊息揪朋友一起來","nav"],["撿起堤邊的垃圾順手帶走","gua"]]},
@@ -273,21 +460,10 @@ const Q = [
     o:[["打造出屬於自己、很厲害的東西","arc"],["守著自己真正在乎的人事物","sea"],["帶著一群人一起完成大事","nav"],["不管跌幾次，都還站在這片海邊","bri"],["用自己的方式，幫助了很多人","shr"],["創造出能感動別人的作品","cre"]],w:2}
 ];
 
-/* ── 計分設定（已用 10 萬次模擬校準）────────────────────────
-   OCT_CAP：沒有任何一型的比例超過這個數 → 隱藏版章魚
-            （模擬亂答者約 7%；真人答題有傾向，實際會低不少）
-            分數是離散的，這裡只有兩檔：0.35 → 約 7%，0.33 → 約 1.5%。
-   FLOOR / LEAD：主型比例夠高、又領先第二名夠多 → 該型進化版
-            （模擬亂答者誤觸不到 1%；從頭到尾同一型的人約 95% 解得到）
-   想讓隱藏版更罕見就把 OCT_CAP 調到 0.33；想讓進化版更難就調高 LEAD。
-   ──────────────────────────────────────────────────────── */
+/* ── 計分設定（沿用原版，已用 10 萬次模擬校準）──────────── */
 const OCT_CAP = 0.35, FLOOR = 0.80, LEAD = 0.50;
-
 const TYPES = ["exp","gua","arc","nav","obs","cre","slu","sea","shr","bri"];
 
-/* 各型「理論最高分」：由題庫自動算出。
-   因為每一型出現的題數不同，計分改用「得分 ÷ 該型最高分」的比例制，
-   否則出現題數少的型（例如海洋守護者）會先天吃虧。 */
 const MAXP = {};
 TYPES.forEach(t => MAXP[t] = 0);
 Q.forEach(q => {
@@ -298,13 +474,19 @@ Q.forEach(q => {
 let idx = 0, scores = {}, picks = [];
 const card = document.getElementById('card');
 
+/* 冷知識解鎖進度：目前存在記憶體，同一次造訪內「再走一次」會累積。
+   若要跨次造訪保存，部署到自己網站後可改成 localStorage：
+   const seen = new Set(JSON.parse(localStorage.getItem('nsysu_facts') || '[]'));
+   ...每次更新後 localStorage.setItem('nsysu_facts', JSON.stringify([...seen])); */
+const seenFacts = new Set();
+
 function resetScores(){ TYPES.forEach(t => scores[t] = 0); picks = []; }
 
 function start(){
   card.innerHTML = `
-    <span class="tag">中山大學 · 海洋科學學院</span>
+    <span class="tag">國立中山大學</span>
     <h1>一趟屬於你的<br><em>海洋旅程</em></h1>
-    <p class="lead">從清晨的西子灣下水，一路潛到夕陽。12 個場景，每一站都問你一句：換作是你，會怎麼做？走到最後，你會知道自己是哪一種台灣的海洋生物——說不定，還會撞見那些藏起來的。</p>
+    <p class="lead">從清晨的西子灣下水，一路潛到夕陽。12 個場景，每一站都問你一句：換作是你，會怎麼做？走到最後，你會知道自己是哪一種台灣的海洋生物——順便，看見一點這所學校真正的樣子。</p>
     <div class="meta"><span>⏱ 約 3 分鐘</span><span>🌊 10 種原型</span><span>🐙 隱藏版 ×11 待解鎖</span></div>
     <button class="btn" onclick="begin()">開始這趟旅程</button>`;
 }
@@ -312,9 +494,11 @@ function begin(){ idx = 0; resetScores(); renderQ(); }
 
 function renderQ(){
   const q = Q[idx], pct = Math.round((idx + 1) / Q.length * 100);
+  const left = Q.length - idx - 1;
+  const nudge = left === 0 ? '最後一站了' : (left <= 3 ? `再 ${left} 站就知道結果` : '');
   card.innerHTML = `
     <div class="prog" role="progressbar" aria-valuenow="${idx+1}" aria-valuemin="1" aria-valuemax="${Q.length}"><i style="width:${pct}%"></i></div>
-    <p class="qcount">第 ${idx+1} ／ ${Q.length} 站</p>
+    <p class="qcount">第 ${idx+1} ／ ${Q.length} 站${nudge ? '　·　' + nudge : ''}</p>
     <p class="scene">◈ ${q.sc}</p>
     <p class="story">${q.t}</p>
     <div class="opts">${q.o.map((o,i)=>`<button class="opt" onclick="pick(${i})">${o[0]}</button>`).join('')}</div>
@@ -322,8 +506,6 @@ function renderQ(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-/* 依選項索引計分，並記下這一題選了什麼，
-   回上一站時才能把分數正確扣回去（原版會重複計分）。 */
 function pick(i){
   const key = Q[idx].o[i][1];
   scores[key] += (Q[idx].w || 1);
@@ -340,15 +522,11 @@ function goBack(){
   renderQ();
 }
 
-/* 比例制：把每一型的得分換算成「佔該型最高分的比例」 */
 function ratios(){
   const r = {};
   TYPES.forEach(t => r[t] = MAXP[t] ? scores[t] / MAXP[t] : 0);
   return r;
 }
-
-/* 同分時取「最後一次選到的那一型」，
-   而不是照固定順序挑（原版會固定偏向排在前面的稀有型）。 */
 function baseWinner(r){
   const top = Math.max(...TYPES.map(t => r[t]));
   const tied = TYPES.filter(t => r[t] === top);
@@ -358,55 +536,124 @@ function baseWinner(r){
   }
   return tied[0];
 }
-
 function winner(){
   const r = ratios();
   const top = Math.max(...TYPES.map(t => r[t]));
-
-  // 沒有任何一型冒出頭 → 隱藏版章魚
   if(top <= OCT_CAP + 1e-9) return 'oct';
-
   const b = baseWinner(r);
   let second = -1;
   TYPES.forEach(t => { if(t !== b && r[t] > second) second = r[t]; });
-
-  // 主型夠高且明顯領先 → 該型進化版
   if(r[b] >= FLOOR - 1e-9 && r[b] - second >= LEAD - 1e-9 && A[b + '2']) return b + '2';
-
   return b;
 }
 
+/* 是否為稀有結果（隱藏版章魚 或 任一進化版） */
+function isRare(key){ return key === 'oct' || key.slice(-1) === '2'; }
+/* 進化版沿用基本型的校園場景 */
+function baseKey(key){ return key.slice(-1) === '2' ? key.slice(0, -1) : key; }
+
+/* 抽 3 則冷知識：優先給還沒看過的；稀有結果才把彩蛋加進池子 */
+function drawFacts(resultKey){
+  const rare = isRare(resultKey);
+  const pool = FACTS.map((f, i) => ({...f, i})).filter(f => !f.rare || rare);
+  const fresh = pool.filter(f => !seenFacts.has(f.i));
+  const stale = pool.filter(f => seenFacts.has(f.i));
+  const shuffle = arr => arr.map(v => [Math.random(), v]).sort((a,b) => a[0]-b[0]).map(v => v[1]);
+  let out = shuffle(fresh).slice(0, 3);
+  if(out.length < 3) out = out.concat(shuffle(stale).slice(0, 3 - out.length));
+  // 稀有結果保證至少出現一則彩蛋
+  if(rare && !out.some(f => f.rare)){
+    const rareFresh = shuffle(pool.filter(f => f.rare && !seenFacts.has(f.i)));
+    const pick = rareFresh[0] || shuffle(pool.filter(f => f.rare))[0];
+    if(pick && !out.some(f => f.i === pick.i)) out[out.length - 1] = pick;
+  }
+  out.forEach(f => seenFacts.add(f.i));
+  return out;
+}
+
+function factsHTML(resultKey){
+  const list = drawFacts(resultKey);
+  const total = FACTS.length;
+  const got = seenFacts.size;
+  const pct = Math.round(got / total * 100);
+  const allRareSeen = FACTS.every((f, i) => !f.rare || seenFacts.has(i));
+  let nudge;
+  if(got >= total) nudge = `你把 ${total} 則全看完了。你現在比很多中山學生還懂這所學校。`;
+  else if(!allRareSeen) nudge = '有 3 則，只有解鎖隱藏版或進化版才看得到。再玩一次試試？';
+  else nudge = '再玩一次，會看到不一樣的 3 則。';
+  return `
+    <div class="facts">
+      <h3>中山冷知識</h3>
+      <ul>${list.map(f => `
+        <li class="${f.rare ? 'frare' : ''}"><span class="ftag">${f.tag}</span><p>${f.text}</p></li>`).join('')}
+      </ul>
+      <div class="fbar"><div class="track"><i style="width:${pct}%"></i></div><span>已解鎖 ${got}／${total}</span></div>
+      <p class="fnudge">${nudge}</p>
+    </div>`;
+}
+
+function ctaHTML(){
+  const btn = (url, cls, label, fallback) => url
+    ? `<a class="btn ${cls}" href="${url}" target="_blank" rel="noopener">${label}</a>`
+    : `<button class="btn ${cls}" onclick="alert('${fallback}')">${label}</button>`;
+  return `
+    ${btn(LINK_EXPLORE, '', '看看中山有什麼 →', '請在程式最上方填入 LINK_EXPLORE。')}
+    ${btn(LINK_EVENT, 'sea', '來現場走一趟：營隊與參訪 →', '請在程式最上方填入 LINK_EVENT。')}
+    ${btn(LINK_FOLLOW, 'ghost', '追蹤中山，看學長姐的日常 →', '請在程式最上方填入 LINK_FOLLOW。')}
+    <p class="hint">不用急著決定什麼，先認識就好。</p>`;
+}
+
+/* 「這個測驗，你該傳給誰」的備選標題，想換直接改 renderResult 裡那行 h3：
+   ·「誰跟你同一片海」      → 最有畫面，但比較文青
+   ·「你的海洋隊友」        → 中性安全
+   ·「合得來 & 合得起來的人」→ 最口語
+   目前選的是行動導向的版本：它就在分享框正上方，
+   把一個靜態標籤變成「去傳給某人」的指令，是這一區真正的工作。 */
 function renderResult(){
   const key = winner();
   const a = A[key];
-  const camp = CAMP_URL
-    ? `<a class="btn" href="${CAMP_URL}" target="_blank" rel="noopener">看看適合你的中山海洋營隊 →</a>`
-    : `<button class="btn" onclick="alert('營隊連結尚未設定：請在程式最上方填入 CAMP_URL。')">看看適合你的中山海洋營隊 →</button>`;
+  const behaviors = BEHAVIORS[baseKey(key)] || [];
   card.innerHTML = `
     <p class="rarity">✦ ${a.rarity}</p>
     <p class="rname">旅程的盡頭，你是——</p>
     <h2 class="rtitle">${a.title}</h2>
     <p class="rsub">${a.name}　·　${a.sub}</p>
     <div class="creature"><div class="disc">${a.svg}</div></div>
+
     <div class="block"><h3>關於你</h3><p>${a.trait}</p></div>
     <div class="block"><h3>你的代表生物</h3><p>${a.fact}</p></div>
-    <div class="block"><h3>你的海洋人際</h3>
-      <div class="pair"><span><b>超級麻吉</b>${a.mate}</span><span><b>互補拍檔</b>${a.duo}</span></div></div>
+
+    <div class="campus">
+      <h3>你是不是⋯⋯</h3>
+      <ul>${behaviors.map(b => `<li>${b}</li>`).join('')}</ul>
+    </div>
+
+    ${factsHTML(key)}
+
+    <div class="block"><h3>這個測驗，你該傳給誰</h3>
+      <div class="pair"><span><b>一拍即合</b>${a.mate}</span><span><b>互補搭檔</b>${a.duo}</span></div></div>
+
     <div class="share"><p>「${a.share}」</p>
       <div class="row"><button class="btn sea" onclick="copyText('${key}',this)">複製分享文案</button></div>
       <small>把測驗傳給你的海洋麻吉，看看你們配不配 👀</small></div>
+
     <div class="actions">
-      ${camp}
-      <button class="btn ghost" onclick="begin()">再走一次</button>
+      ${ctaHTML()}
+      <button class="btn ghost" onclick="begin()">我還想再玩一次</button>
     </div>
-    <p class="note">＊「海洋營隊」按鈕之後可接上實際報名連結 / QR code</p>`;
+
+    <p class="disclaim">這是一份為了好玩做的測驗，不是性向鑑定。<br>真正的你，比 12 題複雜得多。</p>
+    <p class="note">＊三顆按鈕之後可接上實際連結 / QR code，建議各自加 UTM 參數</p>`;
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-/* 只傳結果代號，再從 A 取文案；
-   避免把含有反引號或 ${ } 的文字直接塞進 HTML 屬性而壞掉。 */
+/* 分享文案自動加上校名與網址（原版分享出去完全沒有品牌） */
+function shareText(key){
+  const tail = SITE_URL ? `\n中山大學 · 海洋性向測驗 ${SITE_URL}` : `\n—— 中山大學 · 海洋性向測驗`;
+  return A[key].share + tail;
+}
 function copyText(key, btn){
-  const text = A[key].share;
+  const text = shareText(key);
   const done = () => { btn.textContent = '已複製 ✓'; setTimeout(() => btn.textContent = '複製分享文案', 1600); };
   const fallback = () => {
     const ta = document.createElement('textarea');
