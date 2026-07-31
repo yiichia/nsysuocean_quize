@@ -6,16 +6,41 @@
 <title>你是哪一種海洋生物？ ｜ 中山大學海洋性向測驗</title>
 <!--
   ============================================================
-  v2 改版重點（相對於原版）
-  1. 結果頁新增「你是不是⋯⋯」——只寫這一型的人的做事方式，
-     不出現任何系名，避免變成科系推薦。
-  2. 結果頁新增「中山冷知識」——每次隨機出 3 則，附解鎖進度，
-     3 則彩蛋只有解鎖隱藏版／進化版才看得到，製造回訪動機。
-  3. 分享文案自動加上校名與網址（原版分享出去完全沒有品牌）。
-  4. CTA 從單一「海洋營隊」改為三軌，並移除科系導向字眼。
-  5. 結果頁底部加上「這不是性向鑑定」的誠實聲明。
+  v4.0 大改版：換皮不換骨
 
-  ⚠ 需要你替換的地方，都用「【待確認】」或「【待填】」標出，搜尋即可找到。
+  12 道題、計分邏輯、進化版機制全部沒動。
+  換掉的只有「代表生物」——因為那 10 個位子測的是個性軸，不是生物本身。
+
+  ── 這一版的核心決定 ──────────────────────────────
+  基本型 11 種 → 全部換成台灣潮間帶／礁岩的在地物種。
+  稀有型（隱藏版＋進化版）→ 保留鯨鯊、虎鯨、鬼蝠魟這些有明星相的。
+  理由：基本型負責講「這是你腳邊的海」，稀有型負責讓人想截圖分享。
+       兩件事都要，但不必由同一隻生物來做。
+
+  ── 位子與生物對照 ────────────────────────────────
+  好奇敢闖   浪頭探路者     白紋方蟹
+  溫柔堅定   海洋守護者     海葵
+  細膩耐心   造管工匠       纓鰓蟲（羽毛管蟲）
+  帶隊策略   洋流領航者     烏魚
+  安靜觀察   潮間帶觀察家   彈塗魚
+  感性創作   變色創作者     花枝（烏賊）
+  不從眾     特立獨行者     海蛞蝓          ← 保留
+  內斂專情   低調專情者     笠螺
+  利他可靠   熱心服務者     清潔蝦          ← 保留
+  韌性恢復   百折不撓者     陽燧足          ← 保留
+  分工協作   一個人的艦隊   僧帽水母        ← v3.2 新增
+  ── 隱藏 ──
+  什麼都沾  難以定義者      章魚
+  在地限定  唯一原生種      柴山多杯孔珊瑚（三選項解鎖，見 CHAI_KEY）
+  ── 進化版（獎勵層，不必在地）──
+  椰子蟹／鯨鯊／隆頭鸚哥魚／虎鯨／螳螂蝦／鬼蝠魟／
+  西班牙舞者／鱟／裂唇魚／燈塔水母
+
+  ── fun fact 改短 ─────────────────────────────────
+  原本的生物介紹是一整段，這版一律壓到 1–2 句。
+  標準：講完會想唸給旁邊的人聽。做不到就代表那句還不夠短或不夠奇。
+
+  ⚠【待確認】的地方請與各單位或圖鑑核對後再上線。
   字型維持系統內建，全站零外部連線。
   ============================================================
 -->
@@ -65,7 +90,6 @@
   .btn:hover{filter:brightness(1.06)} .btn:active{transform:scale(.98)}
   .btn.ghost{background:#fff;color:var(--deep);border:1.5px solid var(--line-c);font-weight:700;box-shadow:none}
   .btn.sea{background:var(--teal);box-shadow:0 8px 18px -8px rgba(32,104,90,.7)}
-  .btn.sm{padding:12px;font-size:14.5px}
   .tag{display:inline-block;font-size:11px;letter-spacing:.14em;color:var(--teal);font-weight:700;
     background:var(--cream);border-radius:99px;padding:5px 12px;margin-bottom:16px}
   .prog{height:7px;background:#e7eef6;border-radius:99px;overflow:hidden;margin-bottom:10px}
@@ -90,22 +114,27 @@
     padding:16px 10px;display:flex;justify-content:center;border:1px solid var(--line-c)}
   .disc svg{width:200px;height:auto;filter:drop-shadow(0 8px 16px rgba(10,74,110,.2))}
   .block{background:var(--cream-lt);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:11px}
-  .block h3{font-size:12px;letter-spacing:.14em;color:var(--teal);text-transform:uppercase;margin-bottom:7px;font-weight:700}
+  .block h3{font-size:12px;letter-spacing:.14em;color:var(--teal);margin-bottom:7px;font-weight:700}
   .block p{font-size:15px;color:var(--ink)}
   .pair{display:flex;flex-direction:column;gap:6px}
   .pair span{font-size:14px;color:var(--ink)}
   .pair b{color:var(--deep);font-weight:700;margin-right:8px;font-size:13px}
 
-  /* ── v2 新增：校園場景區（不提系名）───────────────── */
+  /* ── fun fact：短句版，字大一點、獨立一塊，讓人想唸出來 ── */
+  .fun{background:#fff;border:1.5px solid var(--line-c);border-left:5px solid var(--teal);
+    border-radius:12px;padding:15px 17px;margin-bottom:11px}
+  .fun h3{font-size:11.5px;letter-spacing:.14em;color:var(--teal);margin-bottom:7px;font-weight:700}
+  .fun p{font-size:16px;line-height:1.68;color:var(--navy);font-weight:600}
+
+  /* ── 校園場景區（不提系名）───────────────────────── */
   .campus{background:#fff;border:1.5px solid var(--line-c);border-radius:14px;padding:16px 17px;margin-bottom:11px}
   .campus h3{font-size:12px;letter-spacing:.12em;color:var(--deep);margin-bottom:11px;font-weight:700}
   .campus ul{list-style:none;display:flex;flex-direction:column;gap:10px}
   .campus li{font-size:14.5px;color:var(--ink);padding-left:19px;position:relative;line-height:1.62}
   .campus li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:50%;
     background:var(--sky);box-shadow:0 0 0 3px rgba(139,183,219,.25)}
-  .campus small{display:block;margin-top:12px;font-size:12px;color:var(--ink2);line-height:1.6}
 
-  /* ── v2 新增：中山冷知識區 ─────────────────────────── */
+  /* ── 中山冷知識區 ───────────────────────────────── */
   .facts{background:linear-gradient(180deg,#fff 0%,#f4f9fd 100%);border:1.5px solid var(--line-c);
     border-radius:14px;padding:16px 17px;margin-bottom:11px}
   .facts h3{font-size:12px;letter-spacing:.12em;color:var(--deep);margin-bottom:4px;font-weight:700}
@@ -122,6 +151,10 @@
   .fbar span{font-size:11.5px;color:var(--ink2);font-weight:600;white-space:nowrap}
   .fnudge{font-size:12.5px;color:var(--teal);margin-top:8px;font-weight:600;line-height:1.6}
 
+  /* ── 提示條（危險或保育訊息）─────────────────────── */
+  .alert{background:#fff4e8;border:1.5px solid #ecd0aa;border-radius:14px;padding:13px 16px;margin-bottom:11px}
+  .alert p{font-size:13.5px;color:var(--amber);line-height:1.65;font-weight:600}
+
   .share{background:var(--cream-lt);border:1.5px dashed #e0c39a;border-radius:14px;padding:15px 17px;margin:15px 0}
   .share p{font-size:15px;color:var(--ink);font-weight:500;margin-bottom:12px;white-space:pre-line}
   .share .row button{width:100%;padding:11px;border-radius:11px;font-size:14px;font-weight:700}
@@ -135,7 +168,7 @@
     text-shadow:0 1px 3px rgba(10,70,90,.3)}
   .foot b{font-weight:700}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-  @media (max-width:380px){h1{font-size:26px}.rtitle{font-size:29px}.story{font-size:17px}}
+  @media (max-width:380px){h1{font-size:26px}.rtitle{font-size:29px}.story{font-size:17px}.fun p{font-size:15px}}
 </style>
 </head>
 <body>
@@ -146,157 +179,186 @@
     <span class="b b1"></span><span class="b b2"></span><span class="b b3"></span><span class="b b4"></span>
   </div>
   <main class="card" id="card"></main>
-  <p class="foot">中山大學｜西子灣 × 壽山 × 太平洋<br><b>示範雛形</b>　劇情與計分皆可調整</p>
+  <p class="foot">中山大學｜西子灣 × 柴山 × 潮間帶<br><b>示範雛形</b>　劇情與計分皆可調整</p>
 </div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════
-   0. 出口連結設定：填入網址後，結果頁三顆按鈕就會生效。
-      留空時按鈕不跳轉，只會提示尚未設定。
-      建議每條都掛 UTM，才知道哪一型的人最容易轉換。
+   0. 出口連結設定
    ═══════════════════════════════════════════════════════════ */
-const LINK_EXPLORE = "";   // 【待填】「看看中山有什麼」落地頁（校園導覽／學院總覽／影片牆）
+const LINK_EXPLORE = "";   // 【待填】「看看中山有什麼」落地頁
 const LINK_EVENT   = "";   // 【待填】營隊／體驗活動／校園參訪報名
-const LINK_FOLLOW  = "";   // 【待填】IG 或 LINE 官方帳號（最重要，唯一能長期溝通的出口）
-const SITE_URL     = "";   // 【待填】測驗本身的短網址，會自動附在分享文案後面
+const LINK_FOLLOW  = "";   // 【待填】IG 或 LINE 官方帳號
+const SITE_URL     = "";   // 【待填】測驗短網址，會自動附在分享文案後面
 
 /* ═══════════════════════════════════════════════════════════
-   1. 十型原型資料（沿用原版，未更動）
+   1. 原型資料
+      fact = 短 fun fact，一到兩句。寫的時候唸一次，唸起來卡就再砍。
    ═══════════════════════════════════════════════════════════ */
 const A = {
-  exp:{name:"抹香鯨 Sperm Whale",title:"深海探險家",sub:"好奇 · 敢闖 · 動手派",rarity:"常見型 · 敢衝的人不少",
-    trait:"別人還在猶豫，你已經下水了。你不是天生大膽，只是好奇心每次都贏過害怕。做了再說、錯了再改，這樣的你其實走得比誰都遠。",
-    fact:"牠是世界上潛得最深的哺乳類之一，能下潛超過 2000 公尺，在一片漆黑裡獵捕大王烏賊。台灣花蓮、宜蘭外海，就有機會遇見牠。",
-    share:"我是深海探險家 🐋 好奇心每次都贏過害怕的那種。你是哪一種海洋生物？",
-    mate:"特立獨行者（海蛞蝓）",duo:"珊瑚建築師（鸚哥魚）· 你衝，他幫你穩住",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="抹香鯨"><path d="M18 78 C18 52 70 44 118 46 C168 48 196 60 202 72 C196 84 168 96 118 98 C70 100 18 104 18 78Z" fill="#2b3f63"/><path d="M18 78 C24 66 40 60 40 78 C40 96 24 90 18 78Z" fill="#1c2c4a"/><path d="M200 70 L216 56 L214 74 L216 90 L200 76Z" fill="#1c2c4a"/><path d="M96 96 C100 112 116 116 122 104" fill="none" stroke="#1c2c4a" stroke-width="7" stroke-linecap="round"/><circle cx="52" cy="72" r="4" fill="#ffc15e"/><path d="M28 70 C34 66 44 66 50 70" fill="none" stroke="#8fa6c4" stroke-width="2" stroke-linecap="round"/></svg>`},
-  gua:{name:"台灣白海豚 · 媽祖魚",title:"海洋守護者",sub:"溫柔 · 堅定 · 有正義感",rarity:"稀有型 · 這樣的人不多",
-    trait:"你心很軟，但軟的地方最硬。看到不對的事會忍不住想管，答應要守護的東西就不會放手。這種人不多，海洋剛好很需要。",
-    fact:"牠是台灣特有亞種，只住在台灣西部海域，全世界剩不到一百隻，大家叫牠「媽祖魚」。牠幾乎是台灣海洋保育的代名詞。",
-    share:"我是海洋守護者 🐬 心軟但認定就不放手，跟剩不到百隻的台灣白海豚同一國。你呢？",
+  /* ── 基本型 11：全部是台灣潮間帶／礁岩的在地物種 ───────── */
+  exp:{name:"白紋方蟹 Grapsus albolineatus",title:"浪頭探路者",sub:"好奇 · 敢闖 · 動手派",rarity:"常見型 · 敢衝的人不少",
+    trait:"浪打過來，別人往後退，你往前跑。你不是天生大膽，只是好奇心每次都贏過害怕。做了再說、錯了再改，這樣的你其實走得比誰都遠。",
+    fact:"浪撲上來的時候，牠不躲——牠往浪裡跑。這種蟹能在濕滑的垂直岩壁上飛奔，你伸手永遠慢一步，柴山的礁岩上到處都是。",
+    share:"我是浪頭探路者 🦀 浪來了別人退，我往浪裡跑。你是哪一種海洋生物？",
+    mate:"特立獨行者（海蛞蝓）",duo:"造管工匠（纓鰓蟲）· 你衝，他幫你穩住",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="白紋方蟹"><path d="M74 108 L58 132 M96 112 L88 136 M128 112 L136 136 M150 108 L166 132" stroke="#3f3550" stroke-width="4.5" fill="none" stroke-linecap="round"/><rect x="64" y="60" width="96" height="54" rx="16" fill="#4b3f63"/><path d="M70 74 C100 68 130 68 154 74 M70 88 C100 83 130 83 154 88 M70 101 C100 97 130 97 154 101" stroke="#e8e2f2" stroke-width="2.2" fill="none" opacity=".8"/><path d="M64 78 C46 66 34 70 30 82 C40 90 54 92 66 90Z" fill="#5d4e78"/><path d="M32 78 C18 70 12 82 22 90 C32 94 38 86 38 82Z" fill="#31283f"/><path d="M160 78 C178 66 190 70 194 82 C184 90 170 92 158 90Z" fill="#5d4e78"/><path d="M192 78 C206 70 212 82 202 90 C192 94 186 86 186 82Z" fill="#31283f"/><path d="M90 60 L90 52 M134 60 L134 52" stroke="#4b3f63" stroke-width="4" stroke-linecap="round"/><circle cx="90" cy="50" r="5.5" fill="#ffd76b"/><circle cx="134" cy="50" r="5.5" fill="#ffd76b"/><circle cx="90" cy="50" r="2.4" fill="#22192e"/><circle cx="134" cy="50" r="2.4" fill="#22192e"/></svg>`},
+
+  gua:{name:"海葵 Sea Anemone",title:"海洋守護者",sub:"溫柔 · 堅定 · 有正義感",rarity:"稀有型 · 這樣的人不多",
+    trait:"你心很軟，但軟的地方最硬。看到不對的事會忍不住想管，答應要守護的東西就不會放手。你不一定站在最前面，但大家都知道，出事的時候可以躲到你這裡。",
+    fact:"小丑魚全身裹著一層黏液，所以鑽進海葵的觸手裡不會被螫。海葵給牠一個家，牠幫海葵趕走敵人——海裡最有名的一組室友。",
+    share:"我是海洋守護者 🌺 別人出事的時候，會躲到我這裡。你是哪一種海洋生物？",
     mate:"熱心服務者（清潔蝦）",duo:"特立獨行者（海蛞蝓）· 你顧全大局，他忠於自己",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="台灣白海豚"><path d="M20 74 C34 50 82 42 128 48 C170 53 196 62 204 70 C196 80 176 86 150 88 C120 90 60 96 32 92 C22 90 14 84 20 74Z" fill="#5fb0d6"/><path d="M20 74 C26 62 40 58 42 74 C44 88 28 86 20 74Z" fill="#3f92bc"/><path d="M150 88 C158 104 176 106 182 94" fill="none" stroke="#3f92bc" stroke-width="8" stroke-linecap="round"/><path d="M96 46 L108 22 L118 48Z" fill="#3f92bc"/><path d="M112 80 C122 92 140 92 150 82" fill="none" stroke="#2f7ba3" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="68" r="4" fill="#0a3a49"/></svg>`},
-  arc:{name:"鸚哥魚 Parrotfish",title:"珊瑚建築師",sub:"細膩 · 耐心 · 擅長建構",rarity:"常見型 · 團隊裡的中流砥柱",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="海葵與小丑魚"><path d="M34 142 C48 126 80 120 110 122 C142 120 174 126 188 142Z" fill="#6f7f8c"/><path d="M88 140 C86 114 90 94 96 86 L126 86 C132 94 136 114 134 140Z" fill="#e08fa8"/><g stroke="#f7bdcd" stroke-width="7" stroke-linecap="round" fill="none"><path d="M96 88 C82 76 68 72 58 62"/><path d="M101 84 C93 68 85 56 79 44"/><path d="M107 81 C103 62 101 50 101 38"/><path d="M115 81 C119 62 123 50 125 38"/><path d="M121 84 C131 68 139 56 145 46"/><path d="M126 88 C140 76 152 72 162 64"/><path d="M92 92 C76 86 64 86 52 82"/><path d="M130 92 C146 86 158 86 170 84"/></g><path d="M104 112 C114 102 134 102 148 108 C134 118 114 120 104 112Z" fill="#ff8a3d"/><path d="M120 104 L120 117 M133 105 L133 115" stroke="#fff4e6" stroke-width="3.5" stroke-linecap="round"/><path d="M148 108 L162 101 L158 109 L162 117Z" fill="#ff8a3d"/><circle cx="110" cy="110" r="2.6" fill="#2a1a10"/></svg>`},
+
+  arc:{name:"纓鰓蟲 · 羽毛管蟲 Feather Duster Worm",title:"造管工匠",sub:"細膩 · 耐心 · 擅長建構",rarity:"常見型 · 團隊裡的中流砥柱",
     trait:"你做事有點龜毛，但那是好的龜毛。細節你都看得到，步驟你都排得順，經你手的東西就是穩。你不太搶鏡，可是少了你，整組會垮。",
-    fact:"牠用像鸚鵡喙的嘴啃食珊瑚上的藻類，順便替礁體「除舊佈新」，還會把珊瑚磨成細沙。你踩過的白沙灘，很多其實是牠們做出來的。",
-    share:"我是珊瑚建築師 🐠 你踩的白沙灘，是我一口一口啃出來的。你是哪一種海洋生物？",
-    mate:"潮間帶觀察家（招潮蟹）",duo:"深海探險家（抹香鯨）· 他衝，你收尾",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="鸚哥魚"><path d="M40 74 C50 46 96 40 130 52 C160 62 178 74 178 74 C178 74 160 86 130 96 C96 108 50 102 40 74Z" fill="#17a2b8"/><path d="M130 52 C150 44 168 44 180 50 C170 62 158 62 130 60Z" fill="#ff8e7a"/><path d="M130 96 C150 104 168 104 180 98 C170 86 158 86 130 88Z" fill="#ffc15e"/><path d="M178 66 L206 54 L200 74 L206 94 L178 82Z" fill="#0d7f92"/><path d="M40 74 C34 68 34 80 40 74Z" fill="#0d7f92"/><path d="M44 72 C40 76 42 82 48 80" fill="none" stroke="#ffc15e" stroke-width="4" stroke-linecap="round"/><circle cx="58" cy="66" r="4.5" fill="#0a3a49"/><circle cx="59" cy="65" r="1.6" fill="#fff"/></svg>`},
-  nav:{name:"領航鯨 Pilot Whale",title:"洋流領航者",sub:"社交 · 有策略 · 帶得動人",rarity:"常見型 · 天生的帶隊角色",
+    fact:"牠一粒一粒撿沙子，替自己蓋一根管子住進去。頭上那叢羽毛其實是鰓，也是牠的手——有人靠近，整叢會「咻」地縮回管子裡。",
+    share:"我是造管工匠 🪶 一粒沙一粒沙，房子是我自己蓋的。你是哪一種海洋生物？",
+    mate:"潮間帶觀察家（彈塗魚）",duo:"浪頭探路者（白紋方蟹）· 他衝，你收尾",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="纓鰓蟲"><path d="M94 150 L94 82 C94 70 126 70 126 82 L126 150Z" fill="#cbb99c"/><circle cx="101" cy="94" r="2" fill="#a8967a"/><circle cx="115" cy="102" r="2" fill="#a8967a"/><circle cx="107" cy="114" r="2" fill="#a8967a"/><circle cx="119" cy="126" r="2" fill="#a8967a"/><circle cx="100" cy="132" r="2" fill="#a8967a"/><g stroke="#e0533f" stroke-width="5.5" stroke-linecap="round" fill="none"><path d="M110 78 C92 70 78 58 68 42"/><path d="M110 76 C98 62 92 46 88 28"/><path d="M110 75 C108 56 108 40 110 22"/><path d="M110 76 C122 62 128 46 132 28"/><path d="M110 78 C128 70 142 58 152 42"/><path d="M110 80 C94 76 80 72 66 64"/><path d="M110 80 C126 76 140 72 154 64"/></g><g stroke="#f4a08e" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".9"><path d="M86 58 L78 50 M94 46 L86 40 M100 36 L94 30 M110 32 L110 24 M120 36 L126 30 M126 46 L134 40 M134 58 L142 50"/></g><circle cx="110" cy="80" r="6" fill="#b8402f"/></svg>`},
+
+  nav:{name:"烏魚 · 鯔 Flathead Grey Mullet",title:"洋流領航者",sub:"社交 · 有策略 · 帶得動人",rarity:"常見型 · 天生的帶隊角色",
     trait:"你走進任何一群人，沒多久就變成大家會看向的那個。不是你愛出風頭，是你真的看得懂局、也帶得動人。要往哪去，你心裡通常已經有答案。",
-    fact:"牠的名字就叫「領航」，成群行動、由帶頭的個體引導整群方向。在台灣東部的賞鯨行程裡，牠是最受歡迎的常客之一。",
-    share:"我是洋流領航者 🐳 走到哪都變成帶隊那個。來測你是哪一種海洋生物？",
-    mate:"熱心服務者（清潔蝦）",duo:"低調專情者（豆丁海馬）· 你在台前，他在幕後",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="領航鯨"><path d="M22 80 C22 52 44 40 62 42 C70 43 74 50 78 58 C120 54 172 62 200 74 C172 86 120 94 82 90 C74 100 40 104 24 92 C16 88 22 84 22 80Z" fill="#2d4a63"/><path d="M40 92 C34 104 22 106 16 96" fill="none" stroke="#22394f" stroke-width="7" stroke-linecap="round"/><path d="M200 68 L216 56 L214 74 L216 90 L200 80Z" fill="#22394f"/><path d="M118 66 C130 78 148 78 158 68" fill="none" stroke="#4a6580" stroke-width="4" stroke-linecap="round"/><circle cx="52" cy="62" r="4" fill="#ffc15e"/></svg>`},
-  obs:{name:"台灣招潮蟹",title:"潮間帶觀察家",sub:"獨立 · 愛分析 · 適應力強",rarity:"少見型 · 安靜的觀察者",
+    fact:"每年冬至前後，烏魚群會準時沿著台灣西岸南下，準到漁民拿牠當日曆用。牠太值錢，所以有個外號叫「烏金」。",
+    share:"我是洋流領航者 🐟 準時到、帶著整隊走的那種。你是哪一種海洋生物？",
+    mate:"熱心服務者（清潔蝦）",duo:"低調專情者（笠螺）· 你在台前，他在幕後",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="烏魚"><path d="M28 78 C46 60 116 56 164 66 C186 71 200 79 200 79 C200 79 186 88 164 93 C116 103 46 96 28 78Z" fill="#8fa6b8"/><path d="M38 80 C70 74 130 72 194 80 C130 88 70 86 38 80Z" fill="#d3e0e8" opacity=".65"/><path d="M200 71 L218 60 L213 79 L218 98 L200 87Z" fill="#6d8496"/><path d="M92 62 L102 46 L114 64Z" fill="#6d8496"/><path d="M138 60 L146 48 L154 62Z" fill="#6d8496"/><path d="M96 94 L102 110 L116 94Z" fill="#6d8496"/><circle cx="44" cy="76" r="6.5" fill="#eef4f8"/><circle cx="44" cy="76" r="3.4" fill="#12202b"/><path d="M32 70 C36 66 42 65 48 67" stroke="#6d8496" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`},
+
+  obs:{name:"彈塗魚 Mudskipper",title:"潮間帶觀察家",sub:"獨立 · 愛分析 · 適應力強",rarity:"少見型 · 安靜的觀察者",
     trait:"你話不多，但沒什麼逃得過你的眼睛。喜歡一個人把事情想到底，別人急著動手時，你早看穿了一大半。你的安靜，其實是在觀察。",
-    fact:"牠是台灣特有種，只住在西部的泥灘地。雄蟹揮舞著一大一小的螯像在「招潮」，對環境變化超級敏感，是灘地健不健康的指標。",
-    share:"我是潮間帶觀察家 🦀 台灣特有的招潮蟹，安靜但什麼都看在眼裡。你是哪一種？",
-    mate:"珊瑚建築師（鸚哥魚）",duo:"洋流領航者（領航鯨）· 你在幕後，他在台前",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="台灣招潮蟹"><ellipse cx="112" cy="86" rx="46" ry="30" fill="#e2542e"/><path d="M70 78 C50 66 44 70 40 78 C46 84 58 86 70 86Z" fill="#ff6b47"/><path d="M42 76 C30 70 26 78 32 84 C38 88 44 84 44 80Z" fill="#c94024"/><path d="M154 78 C176 60 196 60 200 74 C196 90 176 92 154 90Z" fill="#ff6b47"/><path d="M196 66 C210 62 214 74 206 82 C198 88 190 80 192 72Z" fill="#c94024"/><path d="M158 74 L200 68 M156 84 L196 86" stroke="#c94024" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M74 108 L60 128 M96 112 L88 132 M128 112 L136 132 M150 108 L164 128" stroke="#c94024" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="96" cy="66" r="5" fill="#0a3a49"/><circle cx="128" cy="66" r="5" fill="#0a3a49"/><path d="M96 66 L96 56 M128 66 L128 56" stroke="#c94024" stroke-width="3" stroke-linecap="round"/></svg>`},
-  cre:{name:"飛魚 Flying Fish",title:"浪花創作者",sub:"感性 · 有創意 · 表達力好",rarity:"常見型 · 感受力特別強",
+    fact:"牠是會離開水的魚：用皮膚呼吸，靠胸鰭在泥灘上「走路」。兩顆眼睛突在頭頂，還能各自轉動，一次看完 360 度。",
+    share:"我是潮間帶觀察家 👀 兩顆眼睛各轉各的，360 度都看得到。你是哪一種？",
+    mate:"造管工匠（纓鰓蟲）",duo:"洋流領航者（烏魚）· 你在幕後，他在台前",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="彈塗魚"><path d="M0 128 C40 118 90 124 130 120 C170 116 200 122 220 118 L220 150 L0 150Z" fill="#93816a"/><path d="M44 118 C56 96 100 90 140 96 C166 100 186 108 192 114 C176 122 140 126 104 126 C72 126 48 126 44 118Z" fill="#61704f"/><path d="M192 108 L212 98 L207 113 L212 128 L192 120Z" fill="#4c5940"/><path d="M96 94 C102 78 116 78 122 92 C114 90 104 90 96 94Z" fill="#7d8c66"/><path d="M136 96 C142 84 152 84 156 94" fill="none" stroke="#7d8c66" stroke-width="5" stroke-linecap="round"/><path d="M76 120 C66 132 54 134 46 128 C56 124 66 120 76 118Z" fill="#7d8c66"/><path d="M116 122 C112 132 120 134 126 128" fill="none" stroke="#4c5940" stroke-width="4" stroke-linecap="round"/><circle cx="58" cy="94" r="10" fill="#61704f"/><circle cx="76" cy="91" r="10" fill="#61704f"/><circle cx="58" cy="92" r="6" fill="#f4ecd8"/><circle cx="76" cy="89" r="6" fill="#f4ecd8"/><circle cx="59" cy="92" r="3" fill="#1e2418"/><circle cx="77" cy="89" r="3" fill="#1e2418"/><path d="M46 106 C56 110 70 110 80 108" fill="none" stroke="#4c5940" stroke-width="2.4" stroke-linecap="round"/></svg>`},
+
+  cre:{name:"花枝 · 虎斑烏賊 Cuttlefish",title:"變色創作者",sub:"感性 · 有創意 · 表達力好",rarity:"常見型 · 感受力特別強",
     trait:"你對世界的感受特別細，看到的東西總想留下來、講出來。腦子裡常有畫面在跑，也很會把感覺變成別人也懂的樣子。你在的地方，事情會被記得。",
-    fact:"牠能躍出海面滑翔好幾百公尺。在蘭嶼達悟族的文化裡，飛魚季是一整年最重要的祭儀，牠連結了海洋、季節，還有人的故事。",
-    share:"我是浪花創作者 🐟 像飛魚一樣總想躍出海面。你是哪一種海洋生物？",
-    mate:"特立獨行者（海蛞蝓）",duo:"潮間帶觀察家（招潮蟹）· 你感性，他理性",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="飛魚"><path d="M36 82 C50 66 108 62 150 70 C176 75 194 82 194 82 C194 82 176 90 150 94 C108 100 50 98 36 82Z" fill="#1fa4bf"/><path d="M70 70 C60 40 44 34 30 36 C46 50 56 64 66 74Z" fill="#9be8f2" opacity=".95"/><path d="M92 72 C88 46 76 40 64 42 C78 54 86 64 90 74Z" fill="#cbf4fa" opacity=".9"/><path d="M194 74 L216 62 L210 82 L216 100 L194 90Z" fill="#0d7f92"/><path d="M62 88 C56 100 46 100 42 92" fill="none" stroke="#0d7f92" stroke-width="4" stroke-linecap="round"/><circle cx="56" cy="78" r="4.5" fill="#0a3a49"/><circle cx="57" cy="77" r="1.5" fill="#fff"/></svg>`},
+    fact:"花枝的皮膚一秒能變好幾次顏色，還能跑出一條一條像跑馬燈的波紋。最妙的是——牠自己其實是色盲。",
+    share:"我是變色創作者 🎨 皮膚上跑得出跑馬燈，卻是個色盲。你是哪一種海洋生物？",
+    mate:"特立獨行者（海蛞蝓）",duo:"潮間帶觀察家（彈塗魚）· 你感性，他理性",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="花枝"><path d="M66 40 C52 50 52 84 66 96 C62 80 62 56 66 40Z" fill="#f2dfb4"/><path d="M154 40 C168 50 168 84 154 96 C158 80 158 56 154 40Z" fill="#f2dfb4"/><ellipse cx="110" cy="66" rx="44" ry="34" fill="#cbaa6d"/><path d="M80 42 C84 60 84 74 80 92 M96 36 C100 58 100 76 96 98 M114 35 C118 58 118 76 114 99 M132 40 C136 60 136 74 132 94" stroke="#7f5f30" stroke-width="4.5" opacity=".75" fill="none" stroke-linecap="round"/><path d="M92 98 C90 116 86 128 82 140 M104 100 C104 118 102 130 100 142 M116 100 C116 118 118 130 120 142 M128 98 C130 116 134 128 138 140" stroke="#cbaa6d" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M86 100 C68 120 52 130 38 133" stroke="#b8965a" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M134 100 C152 120 168 130 182 133" stroke="#b8965a" stroke-width="5" stroke-linecap="round" fill="none"/><ellipse cx="86" cy="62" rx="10" ry="7.5" fill="#f9f1de"/><path d="M79 62 C83 68 87 57 91 63 C93 66 95 61 95 61" stroke="#1e2418" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`},
+
   slu:{name:"海蛞蝓 · 裸鰓類 Nudibranch",title:"特立獨行者",sub:"獨特 · 有美感 · 不從眾",rarity:"稀有型 · 很難被複製",
     trait:"你沒在管別人怎麼想，這反而是你最好看的地方。有自己的品味、自己的節奏，慢慢來也沒關係，反正你走的路很難有人複製。獨一無二，是你不用努力就有的東西。",
-    fact:"台灣珊瑚礁海域有好幾百種海蛞蝓，體型多半只有幾公分，卻擁有全海洋數一數二鮮豔的顏色。有些種類還會偷走獵物的毒素來武裝自己，是潛水攝影師最愛拍的「海中珠寶」。",
-    share:"我是特立獨行者 🐌✨ 小小一隻卻是全海洋最搶眼的海蛞蝓。換你測測看？",
-    mate:"浪花創作者（飛魚）",duo:"海洋守護者（白海豚）· 他顧全大局，你忠於自己",
+    fact:"牠多半只有幾公分，卻是全海洋最鮮豔的一群。有些種類還會偷走獵物身上的毒，拿來武裝自己。",
+    share:"我是特立獨行者 🐌✨ 小小一隻，卻是全海洋最搶眼的那個。換你測測看？",
+    mate:"變色創作者（花枝）",duo:"海洋守護者（海葵）· 他顧全大局，你忠於自己",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="海蛞蝓"><path d="M26 100 C34 88 60 84 110 84 C158 84 188 88 196 96 C190 106 158 112 110 112 C60 112 20 112 26 100Z" fill="#8a4fd6"/><path d="M30 108 C60 116 158 116 194 100 C190 108 150 118 100 118 C60 118 30 116 30 108Z" fill="#5f2fa8" opacity=".8"/><path d="M62 86 C56 66 66 62 72 76 C75 84 70 88 62 86Z" fill="#ffb14a"/><path d="M84 84 C80 62 92 60 96 74 C98 82 92 88 84 84Z" fill="#ff6b47"/><path d="M108 84 C104 60 116 58 120 72 C122 82 116 88 108 84Z" fill="#ffb14a"/><path d="M132 84 C128 62 140 62 144 74 C146 82 140 88 132 84Z" fill="#ff6b47"/><path d="M156 86 C152 66 162 64 166 76 C168 84 162 90 156 86Z" fill="#ffb14a"/><path d="M186 92 C190 78 196 76 198 84" fill="none" stroke="#2bb8cc" stroke-width="6" stroke-linecap="round"/><path d="M196 94 C202 82 208 82 210 90" fill="none" stroke="#2bb8cc" stroke-width="6" stroke-linecap="round"/><path d="M40 102 C90 96 150 96 190 100" fill="none" stroke="#ffe08a" stroke-width="2" stroke-linecap="round" opacity=".8"/><circle cx="184" cy="101" r="3" fill="#0a3a49"/></svg>`},
-  sea:{name:"豆丁海馬 Pygmy Seahorse",title:"低調專情者",sub:"內斂 · 專注 · 忠於所愛",rarity:"稀有型 · 深藏不露",
-    trait:"你不愛搶，但認定的東西會一直放在心上。你懂得融入環境、默默扎根，一旦是你在乎的人事物，就長長久久。安靜歸安靜，份量一點都不輕。",
-    fact:"牠全長不到 2 公分，是世界上最小的海馬之一，能把自己擬態成珊瑚（海扇）的一部分，連顏色和突起都一樣，而且是由「爸爸」懷孕育兒。台灣南部和離島的珊瑚礁區都找得到牠。",
-    share:"我是低調專情者 🌱 台灣珊瑚上不到 2 公分的豆丁海馬，小而專一。你呢？",
-    mate:"潮間帶觀察家（招潮蟹）",duo:"洋流領航者（領航鯨）· 你內斂，他外放",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="豆丁海馬"><path d="M108 32 C96 40 100 54 104 62 C110 74 110 84 100 92 C90 100 92 114 104 118 C114 122 120 114 116 108" fill="none" stroke="#e56aa8" stroke-width="15" stroke-linecap="round"/><circle cx="114" cy="34" r="12" fill="#e56aa8"/><path d="M122 30 L142 24" stroke="#e56aa8" stroke-width="7" stroke-linecap="round"/><path d="M100 46 C88 44 86 54 96 56Z" fill="#d24f95"/><circle cx="110" cy="36" r="2.5" fill="#0a3a49"/><circle cx="98" cy="62" r="3" fill="#f7a8d0"/><circle cx="104" cy="80" r="3" fill="#f7a8d0"/><circle cx="96" cy="98" r="3" fill="#f7a8d0"/></svg>`},
+
+  sea:{name:"笠螺 Limpet",title:"低調專情者",sub:"內斂 · 專注 · 忠於所愛",rarity:"稀有型 · 深藏不露",
+    trait:"你不愛搶，但認定的東西會一直放在心上。你懂得默默扎根，一旦是你在乎的人事物，就長長久久。安靜歸安靜，你就是會回到同一個地方。",
+    fact:"退潮牠出門吃藻，漲潮前一定回到岩石上自己磨出來的那個凹槽——不差半公分。那個凹槽，是牠一輩子的家。",
+    share:"我是低調專情者 🐚 每次都回到同一塊石頭上，不差半公分。你呢？",
+    mate:"潮間帶觀察家（彈塗魚）",duo:"洋流領航者（烏魚）· 你內斂，他外放",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="笠螺"><path d="M8 142 C28 116 70 106 110 108 C152 106 192 116 212 142Z" fill="#6f7f8c"/><ellipse cx="164" cy="116" rx="22" ry="6" fill="#54626e"/><path d="M138 118 C146 114 152 114 158 115" stroke="#54626e" stroke-width="2.5" stroke-dasharray="4 5" fill="none" stroke-linecap="round"/><path d="M48 116 C54 86 72 66 92 66 C112 66 130 86 136 116 C114 122 70 122 48 116Z" fill="#bda78c"/><path d="M92 68 L58 114 M92 68 L75 118 M92 68 L92 120 M92 68 L109 118 M92 68 L126 114" stroke="#94806a" stroke-width="2" opacity=".75"/><path d="M48 116 C70 122 114 122 136 116 C114 126 70 126 48 116Z" fill="#94806a"/><path d="M52 118 C74 124 110 124 132 118" fill="none" stroke="#5f5140" stroke-width="2" opacity=".5"/></svg>`},
+
   shr:{name:"清潔蝦 Cleaner Shrimp",title:"熱心服務者",sub:"可靠 · 利他 · 人緣好",rarity:"常見型 · 大家的神隊友",
     trait:"大家有事，第一個想到的就是你。你細心、可靠，還會讓身邊的人不知不覺變得更好。你的厲害不在自己多強，而在你讓整群人都順了起來。",
-    fact:"牠會在礁石上開「清潔站」，替大魚清掉身上的寄生蟲和壞死組織，甚至游進魚嘴裡清牙縫都不會被吃掉，因為這是雙方都划算的合作。台灣珊瑚礁很常見。",
+    fact:"牠在礁石上開「清潔站」，替大魚清掉身上的寄生蟲，游進魚嘴裡清牙縫也不會被吃掉——因為這筆生意雙方都划算。",
     share:"我是熱心服務者 🦐 大家有事都想到我的那隻清潔蝦。你是哪一種海洋生物？",
-    mate:"海洋守護者（白海豚）",duo:"洋流領航者（領航鯨）· 他帶隊，你是神隊友",
+    mate:"海洋守護者（海葵）",duo:"洋流領航者（烏魚）· 他帶隊，你是神隊友",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="清潔蝦"><path d="M58 94 C68 70 110 62 150 70 C170 74 182 82 188 92 C178 98 150 102 120 102 C94 102 64 102 58 94Z" fill="#ff6b47"/><path d="M188 92 L208 84 M188 92 L208 92 M188 92 L208 100" stroke="#ff6b47" stroke-width="5" stroke-linecap="round"/><path d="M94 74 C96 90 94 98 90 100" stroke="#fff2e6" stroke-width="4" fill="none" opacity=".9"/><path d="M120 70 C122 88 120 98 116 102" stroke="#fff2e6" stroke-width="4" fill="none" opacity=".9"/><path d="M146 72 C148 88 146 98 142 100" stroke="#fff2e6" stroke-width="4" fill="none" opacity=".9"/><path d="M58 92 C40 82 26 62 20 42" stroke="#7fd8e6" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M58 94 C42 90 26 84 16 76" stroke="#7fd8e6" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M60 96 C48 102 36 108 26 114" stroke="#e2542e" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M84 102 L80 118 M104 102 L102 120 M124 102 L126 120 M144 100 L150 116" stroke="#e2542e" stroke-width="2.5" stroke-linecap="round"/><circle cx="68" cy="86" r="4" fill="#0a3a49"/></svg>`},
+
   bri:{name:"陽燧足 Brittle Star",title:"百折不撓者",sub:"堅韌 · 靈活 · 恢復力強",rarity:"少見型 · 韌性驚人",
     trait:"你跌過，而且跌得不輕，但你每次都爬起來，還站得更穩。你不硬碰硬，會轉個彎、慢慢長回來。別小看你這種軟中帶韌，那是真的打不倒。",
-    fact:"牠是海星的近親，五條細長的腕足能靈活扭動。就算斷掉一條腕也能重新長回來，甚至能丟下斷肢逃生。牠們常躲在台灣的礁石縫隙和潮池裡。",
-    share:"我是百折不撓者 ✴️ 斷了腕也能長回來的陽燧足，怎麼跌都站得起來。你是哪一種？",
-    mate:"深海探險家（抹香鯨）",duo:"浪花創作者（飛魚）· 你硬底子，他軟實力",
+    fact:"斷了一條腕還能長回來，情急時牠甚至會主動丟下一條腕逃命。台灣潮池的石頭翻開來，常常就有一隻。",
+    share:"我是百折不撓者 ✴️ 斷了腕還能長回來，怎麼跌都站得起來。你是哪一種？",
+    mate:"浪頭探路者（白紋方蟹）",duo:"變色創作者（花枝）· 你硬底子，他軟實力",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="陽燧足"><path d="M110 68 C104 46 118 40 108 18" fill="none" stroke="#a15fb0" stroke-width="7" stroke-linecap="round"/><path d="M98 76 C76 68 70 52 48 48" fill="none" stroke="#a15fb0" stroke-width="7" stroke-linecap="round"/><path d="M100 92 C82 106 76 120 56 130" fill="none" stroke="#a15fb0" stroke-width="7" stroke-linecap="round"/><path d="M120 92 C138 106 144 120 164 130" fill="none" stroke="#a15fb0" stroke-width="7" stroke-linecap="round"/><path d="M122 76 C144 68 150 52 172 48" fill="none" stroke="#a15fb0" stroke-width="7" stroke-linecap="round"/><circle cx="110" cy="80" r="15" fill="#7a3f8c"/><circle cx="110" cy="80" r="6" fill="#c98fd6"/></svg>`},
+
+  por:{name:"僧帽水母 · 葡萄牙戰艦 Portuguese man o' war",title:"一個人的艦隊",sub:"分工 · 順勢 · 界線分明",
+    rarity:"少見型 · 看起來一個人，其實是一整隊",
+    trait:"你看起來只是漂在水面上，隨風走、不太費力，其實你身上裝著一整支艦隊：哪一塊自己扛、哪一塊交出去，你分得很清楚。你不硬拚，你等風向。你很好相處，但界線很清楚——真的越線的人，會知道。",
+    fact:"牠不是一隻水母，是一整個群落：有的個體變成浮鰾負責漂，有的變成觸鬚負責獵食，誰也離不開誰——所以牠又叫「葡萄牙戰艦」。",
+    share:"我是一個人的艦隊 ⛵ 看起來只是漂著，其實身上裝了一整隊。你是哪一種海洋生物？",
+    mate:"洋流領航者（烏魚）",duo:"熱心服務者（清潔蝦）· 你分工，他補位",
+    alert:"牠的觸鬚可以拖到 20 公尺長，碰到會劇痛。就算擱淺在沙灘上，刺細胞還是有毒——看到牠，千萬不要撿。",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="僧帽水母"><path d="M70 92 C64 106 74 116 66 130 C60 140 64 146 60 150" fill="none" stroke="#7fb8e0" stroke-width="3" stroke-linecap="round" opacity=".85"/><path d="M90 96 C86 112 96 122 90 136 C86 146 90 148 88 150" fill="none" stroke="#a67fd6" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M110 98 C108 114 116 124 110 140 C106 148 110 148 108 150" fill="none" stroke="#7fb8e0" stroke-width="3.5" stroke-linecap="round" opacity=".9"/><path d="M132 96 C134 112 126 122 132 138 C136 146 132 148 132 150" fill="none" stroke="#a67fd6" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M154 92 C158 106 150 114 156 128 C160 138 156 144 156 150" fill="none" stroke="#7fb8e0" stroke-width="2.5" stroke-linecap="round" opacity=".75"/><path d="M38 84 C44 66 80 56 118 58 C154 60 180 68 188 80 C178 90 142 96 108 96 C70 96 32 94 38 84Z" fill="#c98fe0"/><path d="M56 70 C74 42 112 34 144 44 C158 48 168 56 172 64 C152 54 116 50 90 58 C74 62 62 66 56 70Z" fill="#e6b7f2"/><path d="M44 88 C80 96 150 94 184 82 C176 92 140 100 106 100 C72 100 44 96 44 88Z" fill="#a86fc4" opacity=".7"/><path d="M66 74 C90 66 130 64 160 70" fill="none" stroke="#f9ecff" stroke-width="2.5" stroke-linecap="round" opacity=".85"/><path d="M8 96 C30 92 52 100 74 98 M144 98 C168 96 192 102 214 98" fill="none" stroke="#8fd0e6" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg>`},
+
+  /* ── 隱藏型 2 ────────────────────────────────────────── */
   oct:{name:"章魚 Octopus（隱藏版）",title:"難以定義者",sub:"多變 · 聰明 · 什麼都能是",rarity:"🐙 隱藏版 · 很少人測得到",
-    trait:"測不準你，因為你根本不只一種。你聰明、會看場合切換自己，十種海洋生物的影子，你身上都有一點。這種人最難被歸類，也最難被取代。",
-    fact:"章魚有三顆心臟、八隻能各自「思考」的腕足，還會瞬間變色、擠進任何縫隙躲過天敵，是海裡數一數二聰明的無脊椎動物。台灣周邊海域就有不少種類。",
-    share:"我抽到隱藏版章魚 🐙 十種海洋生物我全沾一點，測不準的那種。你是哪一種？",
+    trait:"測不準你，因為你根本不只一種。你聰明、會看場合切換自己，每一種海洋生物的影子，你身上都有一點。這種人最難被歸類，也最難被取代。",
+    fact:"章魚有三顆心臟、八隻能各自「思考」的腕足，還能瞬間變色、擠進比自己小得多的縫隙。",
+    share:"我抽到隱藏版章魚 🐙 每一種我都沾一點，測不準的那種。你是哪一種？",
     mate:"每一種你都能當朋友",duo:"因為你身上，什麼都有一點",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="章魚"><path d="M110 28 C82 28 66 50 66 76 C66 90 74 98 88 100 C100 102 120 102 132 100 C146 98 154 90 154 76 C154 50 138 28 110 28Z" fill="#c0568f"/><path d="M70 94 C56 106 60 120 48 128 M82 100 C74 116 84 124 72 136 M94 102 C88 120 98 128 88 140 M106 103 C102 122 110 130 102 142 M116 103 C120 122 112 130 120 142 M128 102 C134 120 124 128 134 140 M140 100 C148 116 138 124 150 136 M150 94 C164 106 160 120 172 128" fill="none" stroke="#a8467d" stroke-width="8" stroke-linecap="round"/><circle cx="96" cy="70" r="7" fill="#fff"/><circle cx="96" cy="71" r="3.5" fill="#0a3a49"/><circle cx="124" cy="70" r="7" fill="#fff"/><circle cx="124" cy="71" r="3.5" fill="#0a3a49"/></svg>`},
-  exp2:{name:"大王烏賊 Giant Squid（進化版）",title:"深海霸主",sub:"探險家的最終型態",rarity:"⚡ 進化版 · 你把探險家點到滿了",
-    trait:"你不只是敢闖——你把好奇心練成了真本事。越深、越黑、越沒人去過的地方，越有你的名字。一般探險家止步的地方，正好是你的起點。",
-    fact:"大王烏賊住在數百公尺深的黑暗海域，眼睛大得像排球（是動物界最大的眼睛），身長能到十幾公尺。人類第一次拍到活體，還是 2000 年之後的事，台灣深海也有牠的紀錄。",
-    share:"我把測驗玩到解鎖進化版了 🦑 深海霸主大王烏賊，探險家的最終型態。你解得到嗎？",
-    mate:"跟你一樣把一件事練到極致的人",duo:"偶爾拉你上來透透氣的夥伴",
-    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="大王烏賊"><path d="M150 26 C160 22 170 30 168 44 C164 66 150 84 132 94 C118 80 120 52 132 38 C137 31 144 28 150 26Z" fill="#c0433f"/><path d="M150 26 C161 18 174 22 170 33 C163 38 155 33 150 30Z" fill="#a3332f"/><circle cx="120" cy="94" r="16" fill="#c0433f"/><circle cx="118" cy="92" r="8" fill="#ffe08a"/><circle cx="118" cy="92" r="3.5" fill="#0a3a49"/><path d="M112 102 C96 120 92 134 78 142 M120 106 C110 126 112 138 100 148 M128 106 C126 128 132 138 124 150 M108 102 C88 114 82 128 66 134" fill="none" stroke="#c0433f" stroke-width="6" stroke-linecap="round"/><path d="M124 104 C150 120 158 140 176 150" fill="none" stroke="#a3332f" stroke-width="5" stroke-linecap="round"/><path d="M116 104 C96 126 70 138 44 144" fill="none" stroke="#a3332f" stroke-width="5" stroke-linecap="round"/><ellipse cx="176" cy="148" rx="7" ry="4" fill="#a3332f"/><ellipse cx="44" cy="144" rx="7" ry="4" fill="#a3332f"/></svg>`},
+
+  chai:{name:"柴山多杯孔珊瑚 Polycyathus chaishanensis",title:"唯一原生種",sub:"扎根 · 低調 · 無可取代",
+    rarity:"🪸 在地限定 · 全世界第一隻，就在中山大門口",
+    trait:"你不長在漂亮的地方。浪最大、水最濁、別人待不住的環境，你反而扎得下根。你不搶眼，也很少解釋自己，但你待著的地方，會慢慢變成別人離不開的地方。你不是因為特別才稀有——你是因為只有一個，才稀有。",
+    fact:"2012 年，一種新的石珊瑚在中山大門口那片崩落的礁岩上被發表，學名就叫「柴山」。牠的珊瑚孔只有 3.7 公厘，長在最濁、浪最大的潮間帶。",
+    share:"我解到了在地限定版 🪸 全世界第一隻柴山多杯孔珊瑚，就是在中山大門口被發現的。你解得到嗎？",
+    mate:"把在乎的地方顧好的人",duo:"願意替你把這件事講出去的夥伴",
+    alert:"牠現在是一級瀕危保育類。因為自然擾動、人為開發與沙埋，柴山原棲地的族群已經幾乎消失，桃園的大潭與觀新藻礁成了牠現在最重要的家。",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="柴山多杯孔珊瑚"><path d="M16 138 C26 118 52 110 78 112 C102 100 140 102 162 112 C186 110 202 120 206 138Z" fill="#6f7f8c"/><path d="M16 138 C60 128 164 128 206 138Z" fill="#5a6874"/><rect x="40" y="86" width="26" height="34" rx="5" fill="#c9704f"/><ellipse cx="53" cy="86" rx="13" ry="7" fill="#e08e63"/><ellipse cx="53" cy="86" rx="7.5" ry="4" fill="#8e4529"/><path d="M42 86 L64 86 M44 82 L62 90 M44 90 L62 82 M53 80 L53 92" stroke="#fbe7d8" stroke-width="1.2" opacity=".85"/><rect x="76" y="72" width="30" height="48" rx="6" fill="#d47c58"/><ellipse cx="91" cy="72" rx="15" ry="8" fill="#eb9a6d"/><ellipse cx="91" cy="72" rx="8.5" ry="4.5" fill="#8e4529"/><path d="M78 72 L104 72 M80 67 L102 77 M80 77 L102 67 M91 65 L91 79" stroke="#fbe7d8" stroke-width="1.3" opacity=".85"/><rect x="116" y="80" width="27" height="40" rx="5" fill="#c9704f"/><ellipse cx="129.5" cy="80" rx="13.5" ry="7" fill="#e08e63"/><ellipse cx="129.5" cy="80" rx="7.5" ry="4" fill="#8e4529"/><path d="M118 80 L141 80 M120 76 L139 84 M120 84 L139 76 M129.5 74 L129.5 86" stroke="#fbe7d8" stroke-width="1.2" opacity=".85"/><rect x="152" y="92" width="23" height="28" rx="5" fill="#d47c58"/><ellipse cx="163.5" cy="92" rx="11.5" ry="6" fill="#eb9a6d"/><ellipse cx="163.5" cy="92" rx="6.5" ry="3.4" fill="#8e4529"/><path d="M154 92 L173 92 M156 88 L171 96 M156 96 L171 88" stroke="#fbe7d8" stroke-width="1.1" opacity=".85"/><circle cx="30" cy="118" r="4" fill="#c9704f"/><circle cx="190" cy="122" r="5" fill="#d47c58"/><circle cx="70" cy="58" r="2.5" fill="#bcd7e2" opacity=".8"/><circle cx="112" cy="46" r="3.5" fill="#bcd7e2" opacity=".7"/><circle cx="150" cy="60" r="2" fill="#bcd7e2" opacity=".8"/></svg>`},
+
+  /* ── 進化版 10：獎勵層，這裡放有明星相的 ─────────────── */
+  exp2:{name:"椰子蟹 Coconut Crab（進化版）",title:"離海最遠的蟹",sub:"探路者的最終型態",rarity:"⚡ 進化版 · 你把探路者點到滿了",
+    trait:"你不只是敢闖——你把好奇心練成了真本事。別人止步的地方，正好是你的起點。你走得太遠，遠到已經回不去原本那個安全的地方，而你也沒打算回去。",
+    fact:"椰子蟹是世界上最大的陸生節肢動物，腳張開能到一公尺，會爬樹，螯力大到剝得開椰子。牠離開海太久，丟回海裡反而會淹死。",
+    share:"我把測驗玩到解鎖進化版了 🥥 椰子蟹，走到連海都回不去的那種。你解得到嗎？",
+    mate:"跟你一樣把一件事練到極致的人",duo:"偶爾拉你回頭看看的夥伴",
+    svg:`<svg viewBox="0 0 220 150" role="img" aria-label="椰子蟹"><circle cx="176" cy="116" r="22" fill="#7a5a3a"/><path d="M160 108 C168 100 186 100 192 108" stroke="#5f4527" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="168" cy="112" r="3" fill="#5f4527"/><circle cx="180" cy="110" r="3" fill="#5f4527"/><path d="M62 116 L46 140 M86 120 L76 144 M124 120 L134 144 M146 116 L162 138" stroke="#4a3579" stroke-width="5.5" fill="none" stroke-linecap="round"/><ellipse cx="104" cy="90" rx="46" ry="30" fill="#6b4fa8"/><path d="M70 84 C48 66 32 70 28 84 C38 94 56 96 70 94Z" fill="#e07a3f"/><path d="M30 78 C14 70 8 84 18 92 C30 98 38 88 38 82Z" fill="#c2591f"/><path d="M138 86 C156 76 168 78 172 88 C164 94 150 96 138 94Z" fill="#e07a3f"/><path d="M78 70 C90 62 118 62 130 70" stroke="#8a6bc7" stroke-width="3" fill="none" opacity=".7"/><path d="M90 72 L88 62 M118 72 L120 62" stroke="#6b4fa8" stroke-width="3" stroke-linecap="round"/><circle cx="88" cy="60" r="4.5" fill="#1c1230"/><circle cx="120" cy="60" r="4.5" fill="#1c1230"/></svg>`},
   gua2:{name:"鯨鯊 · 豆腐鯊 Whale Shark（進化版）",title:"溫柔巨人",sub:"守護者的最終型態",rarity:"⚡ 進化版 · 你把守護者點到滿了",
     trait:"你的溫柔有了重量。你不喊口號，只是穩穩地在，讓身邊的一切都覺得安全。最強的守護，往往最安靜——大到能護住一整片海。",
-    fact:"鯨鯊是世界上最大的魚，體長可達十幾公尺，卻只吃浮游生物和小魚，溫和到能讓潛水者靠近同游。台灣早年叫牠「豆腐鯊」，現在是最受歡迎的保育明星。",
+    fact:"鯨鯊是世界上最大的魚，十幾公尺長，卻只吃浮游生物和小魚，溫和到能讓人在旁邊同游。台灣早年叫牠「豆腐鯊」。",
     share:"我把測驗玩到解鎖進化版了 🐋 溫柔巨人鯨鯊，守護者的最終型態。你解得到嗎？",
     mate:"跟你一樣把別人放前面的人",duo:"幫你把守護化成行動的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="鯨鯊"><path d="M28 78 C40 58 90 54 140 60 C176 64 196 72 200 78 C196 84 176 92 140 96 C90 102 40 98 28 78Z" fill="#3f6f8f"/><path d="M28 78 C30 72 40 70 46 74 C40 80 34 82 28 78Z" fill="#33607d"/><path d="M200 72 L218 60 L214 78 L218 96 L200 84Z" fill="#33607d"/><path d="M110 60 L120 40 L134 62Z" fill="#33607d"/><path d="M96 96 L104 114 L118 96Z" fill="#33607d"/><path d="M40 88 C90 98 140 94 190 84 C150 92 90 96 40 88Z" fill="#cfe6ee" opacity=".5"/><circle cx="70" cy="74" r="3" fill="#dff1f6"/><circle cx="90" cy="82" r="3" fill="#dff1f6"/><circle cx="108" cy="72" r="3" fill="#dff1f6"/><circle cx="126" cy="80" r="3" fill="#dff1f6"/><circle cx="146" cy="74" r="3" fill="#dff1f6"/><circle cx="164" cy="80" r="3" fill="#dff1f6"/><circle cx="82" cy="88" r="2.5" fill="#dff1f6"/><circle cx="120" cy="66" r="2.5" fill="#dff1f6"/><circle cx="150" cy="86" r="2.5" fill="#dff1f6"/><circle cx="44" cy="76" r="3.5" fill="#0a3a49"/></svg>`},
-  arc2:{name:"隆頭鸚哥魚 Bumphead Parrotfish（進化版）",title:"造礁巨匠",sub:"珊瑚建築師的最終型態",rarity:"⚡ 進化版 · 你把珊瑚建築師點到滿了",
+  arc2:{name:"隆頭鸚哥魚 Bumphead Parrotfish（進化版）",title:"造礁巨匠",sub:"造管工匠的最終型態",rarity:"⚡ 進化版 · 你把造管工匠點到滿了",
     trait:"你不只是把細節做好，你會把整件事撐起來。別人看你安靜地啃、慢慢地堆，回頭才發現整片風景都是你打造的。真正的大工程，都是你這種人默默做出來的。",
-    fact:"隆頭鸚哥魚是體型最大的鸚哥魚，能長到一公尺半，會用額頭去撞珊瑚、大口啃食，一年產出的白沙多達好幾百公斤。牠們成群巡遊，是珊瑚礁真正的地景工程師。台灣的綠島、蘭嶼有牠的紀錄。",
-    share:"我把測驗玩到解鎖進化版了 🐡 造礁巨匠隆頭鸚哥魚，一整片白沙灘都是我蓋的。你解得到嗎？",
+    fact:"牠會用額頭去撞珊瑚、大口啃食，一年拉出好幾百公斤的白沙。你踩過的白沙灘，很多是牠做出來的。",
+    share:"我把測驗玩到解鎖進化版了 🐡 造礁巨匠隆頭鸚哥魚，白沙灘是我蓋的。你解得到嗎？",
     mate:"跟你一樣把事情做到底的人",duo:"幫你把作品讓更多人看見的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="隆頭鸚哥魚"><path d="M52 76 C60 44 104 38 138 50 C166 60 182 74 182 74 C182 74 166 88 138 98 C104 110 60 108 52 76Z" fill="#2f8f7a"/><path d="M62 54 C48 50 44 66 54 74 C60 66 62 58 62 54Z" fill="#3aa389"/><path d="M52 74 C40 72 40 84 52 82Z" fill="#f2b84a"/><path d="M182 66 L208 54 L202 74 L208 94 L182 82Z" fill="#1f7565"/><path d="M120 46 L132 30 L146 50Z" fill="#1f7565"/><circle cx="70" cy="66" r="4.5" fill="#0a3a49"/><circle cx="71" cy="65" r="1.5" fill="#fff"/><path d="M96 62 C110 68 128 68 140 62 M96 84 C110 90 128 90 140 84" stroke="#1f7565" stroke-width="2" fill="none" opacity=".5"/></svg>`},
   nav2:{name:"虎鯨 Orca（進化版）",title:"海洋統帥",sub:"洋流領航者的最終型態",rarity:"⚡ 進化版 · 你把洋流領航者點到滿了",
     trait:"你帶的不只是一群人，是一整套默契。你懂策略、也懂人心，說一句大家就到位。最強的領袖不靠命令，而是讓整個團隊心甘情願跟著你走——那就是你。",
-    fact:"虎鯨是海裡的頂級掠食者，由年長的母鯨帶領整個家族，會團隊分工圍捕獵物，不同族群還各自有專屬的「語言」和文化。台灣東部海域偶爾能見到牠們的身影。",
+    fact:"虎鯨家族由年長的母鯨帶領，會分工圍捕獵物，不同族群還各自有一套自己的「語言」。",
     share:"我把測驗玩到解鎖進化版了 🐋 海洋統帥虎鯨，走到哪整隊都跟著我。你解得到嗎？",
     mate:"信任你、願意跟你走的人",duo:"在背後把細節顧好的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="虎鯨"><path d="M20 82 C22 54 46 42 66 44 C76 45 80 54 84 62 C124 56 176 64 202 76 C176 88 124 96 86 92 C78 102 44 106 26 94 C16 90 20 86 20 82Z" fill="#1b1e28"/><path d="M92 52 L104 22 L118 56Z" fill="#141620"/><path d="M200 70 L216 58 L214 76 L216 92 L200 82Z" fill="#141620"/><path d="M70 92 C110 100 150 96 190 86 C150 92 110 96 70 92Z" fill="#eef4f8" opacity=".9"/><ellipse cx="52" cy="66" rx="8" ry="4" fill="#eef4f8"/><circle cx="46" cy="70" r="3.5" fill="#0a3a49"/></svg>`},
   obs2:{name:"螳螂蝦 Mantis Shrimp（進化版）",title:"全視之眼",sub:"潮間帶觀察家的最終型態",rarity:"⚡ 進化版 · 你把潮間帶觀察家點到滿了",
     trait:"你看得到別人看不到的東西。你安靜地觀察、快速地判斷，等你出手時，早就把全局算得清清楚楚。這種洞察力，是別人再努力也學不來的天賦。",
-    fact:"螳螂蝦有動物界最複雜的眼睛——人的眼睛有三種感光細胞，牠有十六種，連紫外光和偏振光都看得見。而且牠出拳的速度快到能在水裡打出爆裂的氣泡。台灣沿海的泥沙地就有牠出沒。",
+    fact:"人的眼睛有三種感光細胞，螳螂蝦有十六種，連偏振光都看得見。而且牠出拳快到能在水裡打出爆裂的氣泡。",
     share:"我把測驗玩到解鎖進化版了 🦐 全視之眼螳螂蝦，看得到你看不到的東西。你解得到嗎？",
     mate:"跟你一樣什麼都看在眼裡的人",duo:"幫你把觀察變成行動的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="螳螂蝦"><path d="M40 88 C60 80 150 78 185 84 C195 86 196 92 188 96 C150 102 60 104 42 98 C34 96 34 90 40 88Z" fill="#1f9e6e"/><path d="M46 86 C70 82 150 80 184 86" stroke="#f26a3a" stroke-width="4" fill="none" opacity=".8"/><path d="M60 96 L58 108 M78 98 L76 110 M96 98 L94 110 M118 98 L116 110 M140 96 L140 108" stroke="#e2542e" stroke-width="2.5" stroke-linecap="round"/><path d="M185 84 L206 78 M185 90 L206 92" stroke="#1f9e6e" stroke-width="4" stroke-linecap="round"/><path d="M44 90 C30 92 24 100 30 106 C36 102 40 98 46 96Z" fill="#f2a03a"/><path d="M42 81 L44 88 M56 79 L56 86" stroke="#1f9e6e" stroke-width="3" stroke-linecap="round"/><circle cx="42" cy="74" r="7" fill="#7ad0ff"/><circle cx="42" cy="74" r="3" fill="#0a3a49"/><circle cx="56" cy="72" r="7" fill="#ffd76b"/><circle cx="56" cy="72" r="3" fill="#0a3a49"/></svg>`},
-  cre2:{name:"鬼蝠魟 Manta Ray（進化版）",title:"深海舞者",sub:"浪花創作者的最終型態",rarity:"⚡ 進化版 · 你把浪花創作者點到滿了",
-    trait:"你把感受活成了作品。你不只是有想法，你能讓整個空間因為你而不一樣。飛魚躍出海面，你則是在深海裡翩翩起舞——同一種靈魂，更大的舞台。",
-    fact:"鬼蝠魟展開雙「翼」可寬達好幾公尺，卻能像跳舞一樣優雅地翻轉、滑行，是海裡最會「飛」的生物之一，也是腦容量數一數二大的魚。台灣的綠島和東部海域都有牠的蹤跡。",
+  cre2:{name:"鬼蝠魟 Manta Ray（進化版）",title:"深海舞者",sub:"變色創作者的最終型態",rarity:"⚡ 進化版 · 你把變色創作者點到滿了",
+    trait:"你把感受活成了作品。你不只是有想法，你能讓整個空間因為你而不一樣。同一種靈魂，更大的舞台。",
+    fact:"鬼蝠魟雙翼展開好幾公尺，卻能像跳舞一樣翻轉、滑行，是腦容量數一數二大的魚。綠島就看得到牠。",
     share:"我把測驗玩到解鎖進化版了 🐟 深海舞者鬼蝠魟，在海裡翩翩飛翔的那種。你解得到嗎？",
     mate:"懂得欣賞你的人",duo:"幫你把作品整理落地的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="鬼蝠魟"><path d="M110 40 C120 40 128 46 132 58 C160 56 196 70 208 92 C186 92 160 86 140 84 C138 96 128 104 110 104 C92 104 82 96 80 84 C60 86 34 92 12 92 C24 70 60 56 88 58 C92 46 100 40 110 40Z" fill="#33526f"/><path d="M100 44 C96 34 92 32 90 40 M120 44 C124 34 128 32 130 40" stroke="#33526f" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M110 104 C110 120 112 134 112 148" stroke="#2a4459" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M92 66 C100 74 120 74 128 66" stroke="#5a7791" stroke-width="3" fill="none" opacity=".6"/><circle cx="96" cy="58" r="2.5" fill="#dbeaf7"/><circle cx="124" cy="58" r="2.5" fill="#dbeaf7"/></svg>`},
   slu2:{name:"西班牙舞者 Spanish Dancer（進化版）",title:"海底舞姬",sub:"特立獨行者的最終型態",rarity:"⚡ 進化版 · 你把特立獨行者點到滿了",
     trait:"你不但做自己，還做得讓全場移不開眼。你有品味、有態度，走到哪都自成一道風景。別人努力想被看見，你只是做你自己，就已經是主角。",
-    fact:"西班牙舞者是體型最大的海蛞蝓之一，能長到將近半公尺，通體火紅，游動時會像跳佛朗明哥一樣，一波一波地擺動身上的裙襬。台灣的珊瑚礁夜潛偶爾能遇見牠。",
+    fact:"牠是最大的海蛞蝓之一，能長到近半公尺，通體火紅，游動時像跳佛朗明哥一樣，一波一波擺動身上的裙襬。",
     share:"我把測驗玩到解鎖進化版了 💃 海底舞姬西班牙舞者，做自己就已經是全場主角。你解得到嗎？",
     mate:"同樣有自己風格的人",duo:"願意當你最佳觀眾的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="西班牙舞者海蛞蝓"><path d="M40 92 C46 74 70 66 110 66 C154 66 186 74 194 88 C186 100 154 108 110 108 C66 108 34 106 40 92Z" fill="#d63a3a"/><path d="M44 100 C54 112 62 100 72 112 C82 100 92 112 102 100 C112 112 122 100 132 112 C142 100 152 112 162 100 C172 112 182 102 190 96" fill="none" stroke="#b52c2c" stroke-width="6" stroke-linecap="round"/><path d="M60 68 C68 58 78 64 86 58 C96 64 106 58 116 64 C126 58 136 64 146 60 C156 64 166 60 174 66" fill="none" stroke="#ff6b5c" stroke-width="5" stroke-linecap="round"/><path d="M186 84 C192 72 198 72 200 80 M196 88 C204 78 210 80 210 88" fill="none" stroke="#ff8a5c" stroke-width="5" stroke-linecap="round"/><path d="M60 90 C100 84 150 84 186 90" stroke="#ffd0b0" stroke-width="2" fill="none" opacity=".7"/></svg>`},
   sea2:{name:"鱟 Horseshoe Crab（進化版）",title:"億年之戀",sub:"低調專情者的最終型態",rarity:"⚡ 進化版 · 你把低調專情者點到滿了",
     trait:"你的專一，是會用一輩子去證明的那種。你不喧嘩、不張揚，只是穩穩地守著在乎的人。世界一直變，你卻始終如一——這份長情，比什麼都難得。",
-    fact:"鱟是存在超過四億年的「活化石」，比恐龍還古老，血液是罕見的藍色。繁殖時公鱟會一路緊抓著母鱟同行，被稱為「夫妻魚」。台灣金門是牠們重要的家，也是重點保育對象。",
+    fact:"鱟活了四億年，比恐龍還老，血是藍色的。繁殖時公鱟會一路抱著母鱟同行，所以牠有個外號叫「夫妻魚」。",
     share:"我把測驗玩到解鎖進化版了 🦀 億年之戀的鱟，認定一個就是一輩子。你解得到嗎？",
     mate:"跟你一樣重情義的人",duo:"陪你把心意說出口的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="鱟"><path d="M70 82 C70 54 92 42 112 42 C132 42 154 54 154 82 C154 92 148 98 138 100 C120 102 104 102 86 100 C76 98 70 92 70 82Z" fill="#7a5a3a"/><path d="M88 98 C92 118 100 128 112 132 C124 128 132 118 136 98 C120 104 104 104 88 98Z" fill="#8a6944"/><path d="M92 106 L88 118 M104 108 L102 122 M120 108 L122 122 M132 106 L136 118" stroke="#5f4527" stroke-width="2.5" stroke-linecap="round"/><path d="M112 132 L112 150" stroke="#5f4527" stroke-width="4" stroke-linecap="round"/><path d="M96 60 C100 56 108 56 112 60 M112 60 C116 56 124 56 128 60" stroke="#5f4527" stroke-width="2" fill="none"/><circle cx="96" cy="64" r="2.5" fill="#3a2a18"/><circle cx="128" cy="64" r="2.5" fill="#3a2a18"/></svg>`},
   shr2:{name:"裂唇魚 · 清潔魚 Cleaner Wrasse（進化版）",title:"礁區良醫",sub:"熱心服務者的最終型態",rarity:"⚡ 進化版 · 你把熱心服務者點到滿了",
     trait:"你不只是幫忙，你已經是大家離不開的那個。你細心、可靠，讓身邊每個人都變得更好。少了你，整個地方都會慢慢卡住——你的重要，藏在別人的順利裡。",
-    fact:"裂唇魚（藍帶清潔魚）會在礁石上開「診所」，大魚小魚都排隊來給牠清寄生蟲。研究發現，只要把牠們移走，整片礁區的魚就會變少、變不健康。你不起眼，卻撐起了一整個群落。",
+    fact:"牠開的「診所」大魚小魚都排隊來看。研究發現，只要把牠們移走，整片礁區的魚就會變少、變不健康。",
     share:"我把測驗玩到解鎖進化版了 🐟 礁區良醫清潔魚，大家都排隊來找我。你解得到嗎？",
     mate:"跟你一樣把別人放心上的人",duo:"帶著你一起把事做大的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="裂唇魚"><path d="M34 80 C50 66 120 62 168 70 C186 73 200 80 200 80 C200 80 186 87 168 90 C120 98 50 94 34 80Z" fill="#3aa0d6"/><path d="M40 80 C60 76 120 74 196 80 C120 86 60 84 40 80Z" fill="#1a2740"/><path d="M200 74 L216 64 L212 80 L216 96 L200 86Z" fill="#2a80b8"/><path d="M96 66 L106 52 L118 68Z" fill="#2a80b8"/><circle cx="46" cy="76" r="4" fill="#0a3a49"/><circle cx="47" cy="75" r="1.4" fill="#fff"/></svg>`},
   bri2:{name:"燈塔水母 Immortal Jellyfish（進化版）",title:"不死者",sub:"百折不撓者的最終型態",rarity:"⚡ 進化版 · 你把百折不撓者點到滿了",
     trait:"你不是不會受傷，你是每次都能重來。跌到谷底，你就從頭長回來，還變得更強。這世界打不倒你，因為你根本沒有「結束」這個選項。",
-    fact:"燈塔水母被稱為「不死水母」——受傷或老化時，牠能讓身體逆轉回最初的幼體階段，重新長大一次，理論上可以無限循環。牠只有幾公釐大，卻幾乎騙過了死亡。台灣周邊的溫暖海域也有牠。",
+    fact:"受傷或老化時，牠能把身體逆轉回最初的幼體，重新長大一次，理論上可以無限循環。牠只有幾公釐大，卻幾乎騙過了死亡。",
     share:"我把測驗玩到解鎖進化版了 🔆 不死者燈塔水母，跌到底也能重頭再來。你解得到嗎？",
     mate:"跟你一樣跌不倒的人",duo:"在你重來時陪著你的夥伴",
     svg:`<svg viewBox="0 0 220 150" role="img" aria-label="燈塔水母"><path d="M74 84 C74 54 92 38 110 38 C128 38 146 54 146 84 C146 90 140 92 132 92 C118 94 102 94 88 92 C80 92 74 90 74 84Z" fill="#bfe6f2" opacity=".85"/><path d="M96 60 C100 74 100 84 100 90 M110 58 C110 74 110 86 110 92 M124 60 C120 74 120 84 120 90" stroke="#e0463a" stroke-width="4" stroke-linecap="round"/><circle cx="110" cy="70" r="7" fill="#f26a5c"/><path d="M80 90 C78 104 82 116 80 130 M88 92 C88 108 90 120 88 134 M98 93 C98 110 96 124 98 138 M110 93 C110 110 112 124 110 140 M122 93 C122 110 124 122 122 138 M132 92 C132 108 130 120 132 134 M140 90 C142 104 138 116 142 130" stroke="#8fd4e6" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M74 84 C90 90 130 90 146 84" fill="none" stroke="#9fdcec" stroke-width="2"/></svg>`}
 };
 
 /* ═══════════════════════════════════════════════════════════
-   2.【v3.1】你是不是⋯⋯：這一型的人常有的做事方式
-      規則：一律用「你」開頭的行為描述，不寫系名、不寫學院。
-      每型 4 條，寫得越具體、越像被說中，分享率越高。
-      進化版（exp2 等）自動沿用基本型，不必另外寫。
+   2. 你是不是⋯⋯：這一型的人常有的做事方式
+      這一區描述的是人，不是生物，所以換生物完全不用動。
    ═══════════════════════════════════════════════════════════ */
 const BEHAVIORS = {
   exp:["說明書還沒看完，你已經開始動手拆了。",
@@ -339,6 +401,14 @@ const BEHAVIORS = {
        "事情不順的時候，你會先找路，而不是先生氣。",
        "你比同齡的人多繞了一段路，但你知道自己為什麼繞。",
        "你不太說自己撐過什麼。"],
+  por:["你很少說「我自己來」，你會先想這件事該分給誰。",
+       "你看起來很好講話，但有一條線，踩過去就回不來了。",
+       "時機不對的時候，你寧願先漂著，也不硬推。",
+       "你不太需要當主角，你要的是這件事成。"],
+  chai:["你待得住別人待不住的地方。",
+        "你很少換環境，但你會把待著的地方慢慢變好。",
+        "別人問你為什麼還在這裡，你其實答不太出來，但你知道你會在。",
+        "你不太說自己重要，可是你不在的時候，大家都會發現。"],
   oct:["每個朋友圈認識的你，好像都不太一樣。",
        "你可以很吵，也可以很安靜，看場合。",
        "「你到底是什麼樣的人」，你自己也答不太出來。",
@@ -346,110 +416,70 @@ const BEHAVIORS = {
 };
 
 /* ═══════════════════════════════════════════════════════════
-   3.【v3 改版】中山冷知識：每次隨機出 3 則
-      rare:true 的只有解鎖隱藏版／進化版才會出現。
-
-      ── 為什麼改名 ──────────────────────────────
-      原本想叫「海洋冷知識」，那會讓「中山＝海」的印象更深，
-      跟破除刻板印象的目標相反。改成「中山冷知識」之後，
-      海洋那幾則從「主題」降為「舉例」，訊息就對了。
-
-      ── 這一版砍掉的 3 則，以及原因 ──────────────
-      ✗「全台最完整的海洋研究」：無法查證，且排名式宣稱對高中生說服力低。
-      ✗「海景配夕陽看到飽」：是氛圍不是知識，看完記不住，已併入西子灣那則。
-      ✗「海工館階梯彩繪」：當拍照點很好，當冷知識太薄。
-        → 建議降級成 IG 視覺素材／校園導覽地圖上的一個點，不佔一張卡。
-
-      ── 還缺的素材（見下方 FACTS_TODO）────────────
-      目前非海洋的具體事例仍偏少，補齊後這個系列才站得住。
-
-      ⚠【待確認】共 9 處，請與各單位核對後再上線。
-      ⚠「學長姐說」3 則是示範文案，強烈建議換成真實徵集。
+   3. 中山冷知識：每次隨機出 3 則
+      rare:true 的只有解鎖稀有結果才會出現。
+      ⚠【待確認】處請與各單位核對後再上線。
    ═══════════════════════════════════════════════════════════ */
 const FACTS = [
-  // ── 只有這裡有（你的 4 強素材）──────────────────────
   {tag:"只有這裡有", text:"海上風帆是中山的體育課選項之一。別的學校打羽球，你這裡可以在西子灣外海學開帆船。"},
   // 【待確認】開課名稱、是否仍為現行選項 → 體育室
   {tag:"只有這裡有", text:"中山的游泳是必修。蛙式 25 公尺沒過，不能畢業。"},
   // 【待確認】現行畢業門檻與標準 → 教務處／體育室
   {tag:"只有這裡有", text:"中山有一艘自己的研究船「海研三號」。學生真的上得去——出海不是比喻。"},
-  // 【待確認】學生實際上船的管道與頻率 → 海科院。重點寫「學生上得去」，不要只寫船。
+  // 【待確認】學生實際上船的管道與頻率 → 海科院
   {tag:"只有這裡有", text:"中山就座落在西子灣。走出教室就是海灘，這在台灣的大學裡非常少見。"},
-  // 【待確認】原稿寫「全台唯一擁有海灘與海水浴場的大學」，若要用「唯一」請先確認，
-  //           否則維持現在這個保守但同樣有力的寫法。
+  {tag:"只有這裡有", text:"2012 年，一種全世界的新物種在中山大門口的礁岩上被發表，學名就叫「柴山多杯孔珊瑚」。人類第一次認識牠，就是在這裡。"},
+  // 【待確認】發表年份與發現地點敘述 → 海科院／原論文（Lin et al., 2012）
 
-  // ── 不只有海（破除刻板印象的主力）──────────────────
   {tag:"不只有海", text:"中山的「石化工程」在 2026 QS 世界學科排名進了全球百大，全國第一。這不是海洋，是工程。"},
   {tag:"不只有海", text:"16 個學科入榜 QS 世界學科排名，入榜數量全國第五。海洋只是其中一個。"},
-  // ⚠ 注意：是「入榜學科數」全國第五，不是「16 個學科各自都在全國前 5」。原簡報寫法會被誤讀。
   {tag:"不只有海", text:"〈鄉愁〉的余光中，在中山教了二十幾年書。你課本裡的那個人，曾經在這裡上下班。"},
   // 【待確認】任教起訖年份 → 文學院／校史室
   {tag:"不只有海", text:"校園裡有練琴的、有排戲的，也有寫程式寫到天亮的。走一圈聽到的聲音，比你想的雜。"},
 
-  // ── 走出校園 ────────────────────────────────────────
   {tag:"走出校園", text:"52 個雙聯學位合作。有人四年多一點，就拿了兩張不同國家的畢業證書。"},
-  // 【待確認】雙聯數字與實際修業年限 → 國際處
+  // 【待確認】雙聯數字與修業年限 → 國際處
   {tag:"走出校園", text:"中山和 46 個國家的學校有合作。想出去，選擇比你以為的多。"},
-  // 【待確認】若查得到「每年實際出去交換的人數」，換成那個數字會強很多——
-  //           303 所是機會，實際人數才是機率。
   {tag:"走出校園", text:"亞洲新灣區就在旁邊。想實習，不一定要搬去台北。"},
   {tag:"走出校園", text:"出校門就是哈瑪星和鹽埕，搭渡輪十分鐘到旗津。老街、咖啡店、深夜的麵攤，都在走路距離內。"},
 
-  // ── 校園日常 ────────────────────────────────────────
   {tag:"校園日常", text:"1980 年以前，這塊地跟動物園有關係。現在變成大學了，但猴子沒走。"},
-  // 【待確認】校地沿革的正確說法 → 校史室。原稿「以前是動物園」講得太滿，容易被挑，
-  //           改成這樣既保留鉤子，又順勢串到獼猴。
+  // 【待確認】校地沿革的正確說法 → 校史室
   {tag:"校園日常", text:"要進學校，得先穿過一條隧道。那條隧道是很多人對中山的第一個記憶。"},
   {tag:"校園日常", text:"從宿舍走到海邊，比走到某些教室還近。"},
   {tag:"校園日常", text:"這裡的坡很陡。四年下來，你的小腿會有感。"},
 
-  // ── 學長姐說（示範文案，建議全數換成真實徵集）────────
   {tag:"學長姐說", text:"「爬坡真的很累。但每次轉彎看到海，就原諒它了。」——大三"},
   {tag:"學長姐說", text:"「我進來以前也以為中山只有海。大一結束才知道自己錯了。」——大二"},
   {tag:"學長姐說", text:"「學校小有小的好。四年下來，你會認識很多不同科系的人。」——大四"},
 
-  // ── 隱藏冷知識（只有解鎖隱藏版／進化版看得到）─────────
   {tag:"隱藏冷知識", rare:true, text:"校門旁邊，是一座一百多年前的英國領事館。你上課的地方，本身就是歷史現場。"},
   {tag:"隱藏冷知識", rare:true, text:"這所學校小到你一天會遇見同一個人三次，又大到你四年還沒走完所有看海的角落。"},
-  {tag:"隱藏冷知識", rare:true, text:"很多人是為了海來的。但最後留下來的理由，每個人都不一樣。"}
+  {tag:"隱藏冷知識", rare:true, text:"很多人是為了海來的。但最後留下來的理由，每個人都不一樣。"},
+  {tag:"隱藏冷知識", rare:true, text:"以柴山命名的那種珊瑚，現在是一級瀕危。柴山的族群幾乎不剩了——你走過的那段海岸，曾經是牠全世界唯一的家。"}
 ];
 
-/* ── 還缺的素材：補進上面的 FACTS 就會自動進池子 ──────────
-   標準三個：只有中山有、可查證、看完會想截圖。
-   目前非海洋的具體事例偏少，這 5 格是整個系列的短板：
-
-   1.【待補】一位現在還在校、學生真的修得到課的知名老師。
-      余光中很強，但他已經離開了——你需要一個「現在進行式」的版本。
-      這是最重要的一格。
-   2.【待補】一堂只有中山開得成的課（不限海洋）。
-   3.【待補】某個學生團隊做出來、真的被用的東西。
-   4.【待補】亞灣／高雄港帶來的、別校學生沒有的實習機會（具體到公司或職缺類型）。
-   5.【待補】某個校園規定或作息造成的特殊生活習慣（像游泳必修那種，好笑又好記）。
-
-   寫法範例（照抄格式即可）：
-   {tag:"不只有海", text:"你的句子。"},
-   ────────────────────────────────────────────────────── */
-
 /* ═══════════════════════════════════════════════════════════
-   4. 題目（沿用原版）
+   4. 題目（與 v3.2 完全相同，換生物不必動題目）
+      ⚠ 新增選項一律加在最後面：柴山珊瑚的解鎖條件是用選項編號記的。
    ═══════════════════════════════════════════════════════════ */
 const Q = [
   {sc:"清晨的西子灣",t:"天剛亮，你獨自站在西子灣的海堤上，海面閃著光、空氣裡有鹹味。這一刻，你最想做什麼？",
     o:[["二話不說換上裝備跳下去","exp"],["先看看今天的海況和浪","obs"],["深呼吸，把這片風景記進心裡","cre"],["傳訊息揪朋友一起來","nav"],["撿起堤邊的垃圾順手帶走","gua"]]},
   {sc:"走進海裡",t:"你踩進海裡，水一路淹到胸口，腳下的世界開始變得不一樣。接下來你會怎麼做？",
-    o:[["一頭鑽進去往深處游","exp"],["慢慢來，讓身體適應水的節奏","bri"],["找一叢海草躲著，靜靜地看","sea"],["回頭確認同伴都跟上了","shr"],["用自己的怪姿勢滑進水裡","slu"]]},
+    o:[["一頭鑽進去往深處游","exp"],["慢慢來，讓身體適應水的節奏","bri"],["找一叢海草躲著，靜靜地看","sea"],["回頭確認同伴都跟上了","shr"],["用自己的怪姿勢滑進水裡","slu"],["浮在水面，讓風和浪帶你走","por"]]},
   {sc:"銀色的魚群",t:"一大群銀色的魚突然把你包圍，整齊地轉彎、閃著光。你的第一個反應是什麼？",
-    o:[["想辦法帶著牠們一起移動","nav"],["記下牠們轉向的規律","obs"],["美到想哭，只想好好看著","cre"],["找出落單的那隻，陪陪牠","gua"],["挑一隻最特別的，跟著牠走","slu"]]},
+    o:[["想辦法帶著牠們一起移動","nav"],["記下牠們轉向的規律","obs"],["美到想哭，只想好好看著","cre"],["找出落單的那隻，陪陪牠","gua"],["挑一隻最特別的，跟著牠走","slu"],["想著這群魚裡，誰在警戒、誰在帶路","por"]]},
   {sc:"神祕的洞穴",t:"礁壁上出現一個黑漆漆的洞穴，裡面透出微光，沒人知道通向哪裡。你會怎麼做？",
     o:[["直接游進去探個究竟","exp"],["先評估風險、規劃好退路才進","arc"],["直覺裡面藏著沒人見過的東西","slu"],["招手叫大家一起來研究","nav"],["安靜守在洞口，不打擾裡面的生物","sea"]]},
   {sc:"受困的海龜",t:"你看到一隻海龜的鰭卡在廢棄漁網裡，正吃力地掙扎。你的反應是什麼？",
-    o:[["立刻游過去幫牠解開","shr"],["又急又心疼，非救不可","gua"],["冷靜想出最不會傷到牠的解法","arc"],["記住位置，之後回報保育單位","obs"],["就算弄很久也絕不放棄","bri"]]},
+    o:[["立刻游過去幫牠解開","shr"],["又急又心疼，非救不可","gua"],["冷靜想出最不會傷到牠的解法","arc"],["記住位置，之後回報保育單位","obs"],["就算弄很久也絕不放棄","bri"],["分頭來：你拆網，另一個人穩住牠","por"]]},
   {sc:"變強的潮水",t:"潮水突然變強，把你往外海推，這時你會怎麼辦？",
-    o:[["逆著流，硬是游回去","exp"],["不硬拚，順著流找機會轉向","bri"],["先穩住，確認每個同伴的位置","shr"],["冷靜判斷洋流的方向","obs"],["大聲喊大家集合、聽你指揮","nav"]]},
+    o:[["逆著流，硬是游回去","exp"],["不硬拚，順著流找機會轉向","bri"],["先穩住，確認每個同伴的位置","shr"],["冷靜判斷洋流的方向","obs"],["大聲喊大家集合、聽你指揮","nav"],["不抵抗，看這股流要把你帶去哪","por"]]},
   {sc:"未曾見過的生物",t:"一隻你從沒見過、閃著奇異光澤的小生物，慢慢飄過你眼前。你會有什麼反應？",
-    o:[["忍不住伸手想摸摸看","exp"],["屏住呼吸，把牠的樣子牢牢記住","obs"],["覺得牠美得像藝術品，看呆了","cre"],["心想『牠跟我一樣，很特別』","slu"],["只想默默守著、別嚇到牠","sea"]]},
+    o:[["忍不住伸手想摸摸看","exp"],["屏住呼吸，把牠的樣子牢牢記住","obs"],["覺得牠美得像藝術品，看呆了","cre"],["心想『牠跟我一樣，很特別』","slu"],["只想默默守著、別嚇到牠","sea"],["先退開一點——有些漂亮的東西不能碰","por"]]},
   {sc:"需要合作的任務",t:"水下有件事得兩個人合作才能完成，你的潛伴看向你，你會怎麼做？",
-    o:[["主動分配好誰做什麼","nav"],["先扛下最難的那部分","shr"],["把步驟拆清楚，一步步來","arc"],["就算出錯也一次次重來到成功","bri"],["想個沒人試過的新方法","slu"]]},
+    o:[["主動分配好誰做什麼","nav"],["先扛下最難的那部分","shr"],["把步驟拆清楚，一步步來","arc"],["就算出錯也一次次重來到成功","bri"],["想個沒人試過的新方法","slu"],["各做各最擅長的一段，最後接起來","por"]]},
   {sc:"沙地上的瓶子",t:"你在沙地上撿到一個舊玻璃瓶，裡面有一張看不太懂的紙條。你心裡第一個念頭是什麼？",
     o:[["覺得這是一場冒險的開始","exp"],["一個人靜靜研究上面的字","sea"],["分析線索、推理它的來歷","obs"],["想像它背後的一整個故事","cre"],["想辦法找到失主還給人家","shr"]]},
   {sc:"夕陽下浮出水面",t:"你浮出水面，正好撞見西子灣最有名的夕陽，整片海被染成金紅色。這一刻的你在想什麼？",
@@ -457,12 +487,17 @@ const Q = [
   {sc:"有人問你",t:"上岸後，有人問你：『你為什麼這麼喜歡海？』你的答案是什麼？",
     o:[["因為海裡永遠有沒探索過的地方","exp"],["因為牠需要有人好好保護","gua"],["因為海裡的一切都精密得驚人","arc"],["因為在海裡，我最能做自己","slu"],["因為牠總讓我想創作、想表達","cre"],["因為海裡還有太多沒被看懂的事","obs"]],w:2},
   {sc:"十年後的你",t:"想像十年後的你，站在同一片海灘。你希望那時的自己是什麼樣子？",
-    o:[["打造出屬於自己、很厲害的東西","arc"],["守著自己真正在乎的人事物","sea"],["帶著一群人一起完成大事","nav"],["不管跌幾次，都還站在這片海邊","bri"],["用自己的方式，幫助了很多人","shr"],["創造出能感動別人的作品","cre"]],w:2}
+    o:[["打造出屬於自己、很厲害的東西","arc"],["守著自己真正在乎的人事物","sea"],["帶著一群人一起完成大事","nav"],["不管跌幾次，都還站在這片海邊","bri"],["用自己的方式，幫助了很多人","shr"],["創造出能感動別人的作品","cre"],["在一個誰也離不開誰的團隊裡","por"]],w:2}
 ];
 
-/* ── 計分設定（沿用原版，已用 10 萬次模擬校準）──────────── */
+/* ── 計分設定 ───────────────────────────────────────── */
 const OCT_CAP = 0.35, FLOOR = 0.80, LEAD = 0.50;
-const TYPES = ["exp","gua","arc","nav","obs","cre","slu","sea","shr","bri"];
+const TYPES = ["exp","gua","arc","nav","obs","cre","slu","sea","shr","bri","por"];
+
+/* 柴山多杯孔珊瑚的解鎖鑰匙：[題號, 選項編號]，都從 0 開始數。
+   = 第 1 站「撿垃圾」＋ 第 5 站「回報保育單位」＋ 第 10 站「守護好這片海」
+   想調鬆，見 chaiUnlocked() 上方註解。 */
+const CHAI_KEY = [[0,4],[4,3],[9,1]];
 
 const MAXP = {};
 TYPES.forEach(t => MAXP[t] = 0);
@@ -471,23 +506,18 @@ Q.forEach(q => {
   new Set(q.o.map(o => o[1])).forEach(t => { MAXP[t] += w; });
 });
 
-let idx = 0, scores = {}, picks = [];
+let idx = 0, scores = {}, picks = [], chosen = [];
 const card = document.getElementById('card');
-
-/* 冷知識解鎖進度：目前存在記憶體，同一次造訪內「再走一次」會累積。
-   若要跨次造訪保存，部署到自己網站後可改成 localStorage：
-   const seen = new Set(JSON.parse(localStorage.getItem('nsysu_facts') || '[]'));
-   ...每次更新後 localStorage.setItem('nsysu_facts', JSON.stringify([...seen])); */
 const seenFacts = new Set();
 
-function resetScores(){ TYPES.forEach(t => scores[t] = 0); picks = []; }
+function resetScores(){ TYPES.forEach(t => scores[t] = 0); picks = []; chosen = []; }
 
 function start(){
   card.innerHTML = `
     <span class="tag">國立中山大學</span>
     <h1>一趟屬於你的<br><em>海洋旅程</em></h1>
-    <p class="lead">從清晨的西子灣下水，一路潛到夕陽。12 個場景，每一站都問你一句：換作是你，會怎麼做？走到最後，你會知道自己是哪一種台灣的海洋生物——順便，看見一點這所學校真正的樣子。</p>
-    <div class="meta"><span>⏱ 約 3 分鐘</span><span>🌊 10 種原型</span><span>🐙 隱藏版 ×11 待解鎖</span></div>
+    <p class="lead">從清晨的西子灣下水，一路潛到夕陽。12 個場景，每一站都問你一句：換作是你，會怎麼做？走到最後，你會知道自己是哪一種海洋生物——而且這 11 種，全是這片海岸邊真的找得到的鄰居。</p>
+    <div class="meta"><span>⏱ 約 3 分鐘</span><span>🌊 11 種原型</span><span>🐙 隱藏版 ×12 待解鎖</span></div>
     <button class="btn" onclick="begin()">開始這趟旅程</button>`;
 }
 function begin(){ idx = 0; resetScores(); renderQ(); }
@@ -510,6 +540,7 @@ function pick(i){
   const key = Q[idx].o[i][1];
   scores[key] += (Q[idx].w || 1);
   picks[idx] = key;
+  chosen[idx] = i;
   idx++;
   idx < Q.length ? renderQ() : renderResult();
 }
@@ -517,7 +548,7 @@ function goBack(){
   if(idx > 0){
     idx--;
     const prev = picks[idx];
-    if(prev){ scores[prev] -= (Q[idx].w || 1); picks[idx] = null; }
+    if(prev){ scores[prev] -= (Q[idx].w || 1); picks[idx] = null; chosen[idx] = null; }
   }
   renderQ();
 }
@@ -536,7 +567,12 @@ function baseWinner(r){
   }
   return tied[0];
 }
+/* 想調鬆成「中兩個就解鎖」：
+   return CHAI_KEY.filter(([q,o]) => chosen[q] === o).length >= 2; */
+function chaiUnlocked(){ return CHAI_KEY.every(([q,o]) => chosen[q] === o); }
+
 function winner(){
+  if(chaiUnlocked()) return 'chai';
   const r = ratios();
   const top = Math.max(...TYPES.map(t => r[t]));
   if(top <= OCT_CAP + 1e-9) return 'oct';
@@ -547,12 +583,9 @@ function winner(){
   return b;
 }
 
-/* 是否為稀有結果（隱藏版章魚 或 任一進化版） */
-function isRare(key){ return key === 'oct' || key.slice(-1) === '2'; }
-/* 進化版沿用基本型的校園場景 */
+function isRare(key){ return key === 'oct' || key === 'chai' || key.slice(-1) === '2'; }
 function baseKey(key){ return key.slice(-1) === '2' ? key.slice(0, -1) : key; }
 
-/* 抽 3 則冷知識：優先給還沒看過的；稀有結果才把彩蛋加進池子 */
 function drawFacts(resultKey){
   const rare = isRare(resultKey);
   const pool = FACTS.map((f, i) => ({...f, i})).filter(f => !f.rare || rare);
@@ -561,11 +594,10 @@ function drawFacts(resultKey){
   const shuffle = arr => arr.map(v => [Math.random(), v]).sort((a,b) => a[0]-b[0]).map(v => v[1]);
   let out = shuffle(fresh).slice(0, 3);
   if(out.length < 3) out = out.concat(shuffle(stale).slice(0, 3 - out.length));
-  // 稀有結果保證至少出現一則彩蛋
   if(rare && !out.some(f => f.rare)){
     const rareFresh = shuffle(pool.filter(f => f.rare && !seenFacts.has(f.i)));
-    const pick = rareFresh[0] || shuffle(pool.filter(f => f.rare))[0];
-    if(pick && !out.some(f => f.i === pick.i)) out[out.length - 1] = pick;
+    const pk = rareFresh[0] || shuffle(pool.filter(f => f.rare))[0];
+    if(pk && !out.some(f => f.i === pk.i)) out[out.length - 1] = pk;
   }
   out.forEach(f => seenFacts.add(f.i));
   return out;
@@ -574,12 +606,13 @@ function drawFacts(resultKey){
 function factsHTML(resultKey){
   const list = drawFacts(resultKey);
   const total = FACTS.length;
+  const rareCount = FACTS.filter(f => f.rare).length;
   const got = seenFacts.size;
   const pct = Math.round(got / total * 100);
   const allRareSeen = FACTS.every((f, i) => !f.rare || seenFacts.has(i));
   let nudge;
   if(got >= total) nudge = `你把 ${total} 則全看完了。你現在比很多中山學生還懂這所學校。`;
-  else if(!allRareSeen) nudge = '有 3 則，只有解鎖隱藏版或進化版才看得到。再玩一次試試？';
+  else if(!allRareSeen) nudge = `有 ${rareCount} 則，只有解鎖隱藏版或進化版才看得到。再玩一次試試？`;
   else nudge = '再玩一次，會看到不一樣的 3 則。';
   return `
     <div class="facts">
@@ -603,12 +636,6 @@ function ctaHTML(){
     <p class="hint">不用急著決定什麼，先認識就好。</p>`;
 }
 
-/* 「這個測驗，你該傳給誰」的備選標題，想換直接改 renderResult 裡那行 h3：
-   ·「誰跟你同一片海」      → 最有畫面，但比較文青
-   ·「你的海洋隊友」        → 中性安全
-   ·「合得來 & 合得起來的人」→ 最口語
-   目前選的是行動導向的版本：它就在分享框正上方，
-   把一個靜態標籤變成「去傳給某人」的指令，是這一區真正的工作。 */
 function renderResult(){
   const key = winner();
   const a = A[key];
@@ -621,7 +648,9 @@ function renderResult(){
     <div class="creature"><div class="disc">${a.svg}</div></div>
 
     <div class="block"><h3>關於你</h3><p>${a.trait}</p></div>
-    <div class="block"><h3>你的代表生物</h3><p>${a.fact}</p></div>
+
+    <div class="fun"><h3>💡 關於這隻生物</h3><p>${a.fact}</p></div>
+    ${a.alert ? `<div class="alert"><p>⚠ ${a.alert}</p></div>` : ''}
 
     <div class="campus">
       <h3>你是不是⋯⋯</h3>
@@ -647,7 +676,6 @@ function renderResult(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-/* 分享文案自動加上校名與網址（原版分享出去完全沒有品牌） */
 function shareText(key){
   const tail = SITE_URL ? `\n中山大學 · 海洋性向測驗 ${SITE_URL}` : `\n—— 中山大學 · 海洋性向測驗`;
   return A[key].share + tail;
